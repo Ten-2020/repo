@@ -1,0 +1,47 @@
+<!--
+ * @Author: 高腾
+ * @Description: 探究vue原码
+ * @Date: 2020-01-14 11:11:12
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>探究vue原码</title>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+    <script>
+      // 这个函数是在 Vue 编译模板 的时候就生成了
+      // 函数柯里化:目的是为了缓存一些内容,减少解析
+      function createGetValueByPath(path){ // 这个函数很棒!
+        let paths = path.split('.') // {xxx,yyy,zzz}
+        return function getValueByPath(obj){
+          let res = obj
+          let prop;
+          while(prop = paths.shift()){ // 把第0项取出来,这个while用的真好!
+            res = res[prop]
+          }
+          return res
+        }
+      }
+      let getValueByPath = createGetValueByPath('a.b.c.d')
+      var o = {
+        a:{
+          b:{
+            c:{
+              d:{
+                e:'正确了'
+              }
+            }
+          }
+        }
+      }
+      
+      var res = getValueByPath(o)
+      console.info('结果', res)
+    </script>
+  </body>
+</html>

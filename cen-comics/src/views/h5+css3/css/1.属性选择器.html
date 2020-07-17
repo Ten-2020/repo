@@ -1,0 +1,77 @@
+<!--
+ * @Author: 高腾
+ * @Description:
+ * @Date: 2020-04-13 15:51:17
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p style="">看看能不能也添加样式</p>
+  <ol>
+    <li class="red" style="">MUI为何诞生</li>
+    <li class="blue">性能和体验的差距，一直是mobile app开发者放弃HTML5的首要原因。</li>
+    <li class="darkred" style="">浏览器天生的切页白屏、不忍直视的转页动画、浮动元素的抖动、无法流畅下拉刷新、侧滑抽屉卡顿等问题</li>
+    <li class="blue">这些都让HTML5开发者倍感挫败，尤其拿到Android低端机运行，摔手机的心都有；</li>
+    <li class="red">另一方面，浏览器默认控件样式又少又丑，制作一个漂亮的控件非常麻烦，也有一些制作简单的ui框架但性能低下。</li>
+    <li class="blueviolet">mui框架有效的解决了这些问题，这是一个可以方便开发出高性能App的框架，也是目前最接近原生App效果的框架。</li>
+  </ol>
+</body>
+<style>
+  /*属性选择器:属性是相对于标签而言.所谓属性选择器就是根据名称的属性的值来查找元素*/
+  /*1.E[attr]:查找拥有attr属性的E标签*/
+  li[style] {
+    text-decoration: underline;
+  }
+
+  /*2.E[attr=value]:查找拥有指定的attr属性并且属性值为value的E标签 */
+  li[class=red] {
+    /* font-size: 30px; */
+  }
+
+  /* 3.E[attr*=value]:查找拥有指定的attr属性并且属性值中包含(可以在任意位置)value的E标签 */
+  li[class*=red] {
+    /* 这样就能匹配到darkred */
+    /* font-size: 30px;  */
+  }
+
+  /* 4.E[attr^=value]:查找拥有指定的attr属性并且属性值以value开头的标签 */
+  li[class^=red] {
+    /* 这样就匹配不到darkred */
+    /* font-size: 30px;  */
+  }
+
+  /* 5.E[attr$=value]:查找拥有指定的attr属性并且属性值以value结束的标签 */
+  li[class$=blue] {
+    /* 这样就匹配不到darkred */
+    font-size: 30px;
+  }
+
+
+  .red {
+    color: red;
+  }
+
+  .blue {
+    color: blue;
+  }
+
+  .darkred {
+    color: darkred;
+  }
+
+  .blue {
+    color: blue;
+  }
+
+  .blueviolet {
+    color: blueviolet
+  }
+</style>
+
+</html>

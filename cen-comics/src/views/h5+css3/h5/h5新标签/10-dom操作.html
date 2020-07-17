@@ -1,0 +1,33 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-27 10:49:29
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM操作</title>
+</head>
+<body>
+  <ul>
+    <li class="red">front-end</li>
+    <li class="green">java</li>
+    <li class="blue">js</li>
+    <li id="jq">jq</li>
+  </ul>
+  <script>
+    window.onload = () => {
+      /* var cli = document.getElementsByTagName('li')[0]
+      console.log(cli) */
+      // query:查询 Selector:选择器 只能获取单个元素,如果获取的不止一个,那么只会返回满足条件的第一个元素
+      // 参数要求:如果是类选择器,必须添加'.' 如果是id选择器,必须添加'#'
+      // var javaLi = document.querySelector('.green')
+      var javaLi = document.querySelector('#jq')
+      // var javaLi = document.querySelectorAll('li')[0]
+      console.log(javaLi)
+    }
+  </script>
+</body>
+</html>

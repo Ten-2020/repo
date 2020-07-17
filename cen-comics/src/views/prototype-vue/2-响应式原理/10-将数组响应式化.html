@@ -1,0 +1,82 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-01-17 09:40:30
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>探究vue原码</title>
+</head>
+<body>
+  <script>
+    var o = {
+      name: 'jim',
+      age: 19,
+      gender: '男',
+      course: [
+        { name: '语文',jie:'20' },
+        { name: '数学',jie:'20' },
+        { name: '英语',jie:'20' },
+      ],
+      abc: {
+        a:1,b:2
+      }
+    } 
+    // 除了递归还可以使用队列 ( 深度优先转换为广度优先 )
+
+    // 简化后的版本
+    function defineReactive( target, key, value, enumerable ) {
+      // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
+
+      console.warn('响应化的对象', target,'属性',key,'值',value)
+      Object.defineProperty( target, key, {
+        configurable: true,
+        enumerable: !!enumerable,
+
+        get () {
+          console.log( `读取 o 的 ${key} 属性` ) // 额外
+          return value
+        },
+        set ( newVal ) {
+          console.log( `设置 o 的 ${key} 属性为: ${newVal}` ) // 额外
+          value = newVal
+        }
+      })
+    }
+
+    // 将对象 o 响应式化
+    function reactify(o){
+
+      let keys = Object.keys( o )
+      for ( let i = 0; i < keys.length; i++ ) { // data是否有属性
+        let key = keys[i]
+        let value = o[key]
+        if (Array.isArray(value)){
+          console.info('数组的引用类型', value)
+          // 数组
+          for(let j=0;j<value.length;j++){
+            reactify(value[j])
+          }
+        } else { // 对象或值类型
+          console.info('对象或值类型', value)
+          if(typeof value === 'object' && value !== null && !Array.isArray(value)){ // abc 就符合这个条件,如果是对象就循环其属性,如果是数组,就循环每个元素.
+            // 是非数组的引用类型
+            console.info('是非数组的引用类型', value)
+            reactify(value) // 递归
+          } else {
+            defineReactive(o,key,value,true)
+          }
+        }
+      }
+    }
+
+    reactify(o)
+
+    
+  </script>
+</body>
+</html>

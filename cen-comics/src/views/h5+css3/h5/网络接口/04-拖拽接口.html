@@ -1,0 +1,98 @@
+<!--
+ * @Author: 高腾
+ * @Description:
+ * @Date: 2020-03-28 10:06:16
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="div">
+    <div class="div1" id="div1">
+      <!-- h5:如果想拖拽元素,就必须为元素添加draggable="true",图片和超链接默认就可以拖拽 -->
+      <p id="pe" class="pe" draggable>试着把我拖过去</p>
+    </div>
+    <div class="div2" id="div2"></div>
+  </div>
+  <script>
+    var p = document.querySelector('#pe')
+    p.ondragstart = () => {
+      console.log('被拖拽元素','ondragstart');
+    }
+    p.ondragend = () => {
+      console.log('被拖拽元素','ondragend');
+    }
+    p.ondragleave = () => { //当鼠标离开时拖拽元素时调用
+      console.log('被拖拽元素','ondragleave');
+    }
+    p.ondrag = () => { //就是拖拽的过程中一直会打印
+      // console.log('被拖拽元素','ondrag');
+    }
+    /* 应用于被拖拽事件
+    ondrag      整个拖拽过程都会调用(应用于拖拽元素(下同))
+    ondragstart 当拖拽开始时调用
+    ondragleave 当鼠标离开拖拽元素时调用
+    ondragend   当拖拽结束时调用 -- 持续
+    */
+    var div2 = document.querySelector('#div2')
+    div2.ondragenter = () => {
+      console.log('目标元素','ondragenter');
+    }
+    div2.ondragover = (e) => { //就是拖拽到div2后就会一直打印
+      // console.log('目标元素','ondragover');
+      e.preventDefault() //阻止浏览器的默认行为
+    }
+    // 浏览器默认会阻止ondrop事件:我们必须在ondragover中阻止浏览器的默认行为
+    div2.ondrop = () => {
+      console.log('目标元素','ondrop');
+      div2.appendChild(p) // 添加被拖拽的元素当前目标元素(左边的会消失,因为appendChild这个方法会删掉之前已经存在的p)
+    }
+    div2.ondragleave = () => {
+      console.log('目标元素','ondragleave');
+    }
+    /* 应用于目标元素的事件
+    ondragenter 当拖拽元素进入时调用(应用于拖拽元素(下同))
+    ondragover  当停留在目标元素上时调用
+    ondrop      当在目标元素上松开鼠标时调用
+    ondragleave 当鼠标离开目标元素时调用
+    */
+    var div1 = document.querySelector('#div1')
+    div1.ondragover = (e) => { //就是拖拽到div2后就会一直打印
+      // console.log('目标元素','ondragover');
+      e.preventDefault() //阻止浏览器的默认行为
+    }
+    // 浏览器默认会阻止ondrop事件:我们必须在ondragover中阻止浏览器的默认行为
+    div1.ondrop = () => {
+      console.log('目标元素','ondrop');
+      div1.appendChild(p) // 添加被拖拽的元素当前目标元素(左边的会消失,因为appendChild这个方法会删掉之前已经存在的p)
+    }
+  </script>
+</body>
+<style>
+  .pe{
+    background-color: yellow;
+  }
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .div{
+    display: flex;
+  }
+  .div1{
+    width: 200px;
+    height: 200px;
+    border: 1px solid pink;
+  }
+  .div2{
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+    border: 1px solid purple;
+  }
+</style>
+</html>

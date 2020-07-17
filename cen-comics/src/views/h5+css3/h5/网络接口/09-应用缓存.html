@@ -1,0 +1,45 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-30 17:30:05
+ -->
+<!DOCTYPE html>
+<!-- manifest="应用程序缓存清单文件的路径 建议文件的扩展名是appcache,这个文件的本质就是一个文本文件" -->
+<html lang="en" manifest="demo.appcache">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>应用缓存</title>
+</head>
+  <style>
+    img{
+      height: 200px;
+      display: block;
+    }
+  </style>
+<body>
+  <!-- 如果断网,如何缓存呢 -->
+  <!-- 
+    在谷歌浏览器中按F12-Network-online那里有个向下的标志-offline->这样应用就处于断网的状态,
+    刷新页面之后,下面那些图片是不会显示(因为可能是本地的原因,还是会显示|知道原理即可)
+    应用缓存: 使用H5,通过创建cache manifest文件,可以轻松创建web应用的离线版本.
+    优势:
+    a.可配置需要缓存的资源
+    b.网络无连接应用仍可用
+    c.本地读取缓存资源,提升访问速度,增强用户体验
+    d.减少请求,缓解服务器负担
+    Cache Manifest 基础
+    a.在 html 标签中包含 manifest 属性
+    b.每个指定了manifest的页面在用户对其访问时都会被缓存.如果未指定manifest属性,则页面不会被缓存,
+    除非在manifest文件中直接指定了该页面.
+
+   -->
+  <!-- <img src="../h5新标签/mp3/南山的部长们.jpg" alt=""> -->
+  <!-- <img src="../h5新标签/mp3/南山的部长们.jpg" alt=""> -->
+  <img src="../h5新标签/mp3/南山的部长们.jpg" alt="">
+  <img src="../h5新标签/mp3/插画.webp" alt="">
+  <!-- <img src="../h5新标签/mp3/插画.webp" alt=""> -->
+  <!-- <img src="../h5新标签/mp3/插画.webp" alt=""> -->
+  <!-- <img src="../h5新标签/mp3/插画.webp" alt=""> -->
+</body>
+</html> 

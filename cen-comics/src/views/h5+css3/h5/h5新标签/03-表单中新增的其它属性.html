@@ -1,0 +1,41 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-23 17:28:14
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单中新增的其它属性</title>
+</head>
+<body>
+  <form action="" id="myForm">
+    <!-- placeholder: 提示文本 -->
+    <!-- autofocus: 自动聚焦 -->
+    <!-- autocomplete: 自动出来之前输入过的内容,当聚焦之后.
+          1.必须成功提交过.:提交过才会记录. 2.当前添加的元素必须有name属性.(也就是下面要写:name="userName")
+    -->
+    用户名: <input type="text" 
+    placeholder="请输入用户名" 
+    autofocus
+    autocomplete="on"
+    name="userName"
+    > <br>
+    <!-- required: 必须输入 -->
+    <!-- pattern: 正则验证
+          *:代表任意个
+          ?:代表0个或者1个
+          +:代表1个或者多个
+    -->
+    手机号:  <input type="tel" required pattern="^(\+86)?1\d{10}$"> <br>
+    <input type="submit">
+    <!-- multiple: 可以选择多个文件 -->
+    文件:  <input type="file" name="photo" multiple> <br>
+    <input type="submit"> <br>
+  </form>
+  <!-- 上面这个提交也会把下面这个地址提交上去,因为写了:form="myForm" -->
+  地址:  <input type="text" name="address" form="myForm"> <br>
+</body>
+</html>

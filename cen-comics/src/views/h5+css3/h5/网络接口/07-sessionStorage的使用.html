@@ -1,0 +1,42 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-30 16:28:09
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- sessionStorage的使用:存储数据到本地.存储的容量5mb左右.
+    1.这个数据本质是存储在当前页面的内存中
+    2.不同浏览器不能共享数据.
+    3.它的生命周期为关闭当前页面,关闭页面,数据会自动消除(刷新页面还是会有)
+
+    setItem(key,value):存储数据,以键值对的方式存储
+    getItem(key):获取数据
+    removeItem(key):删除数据
+    clear():清空所有存储的内容
+  -->
+  <input type="text" id="userName"> <br>
+  <input type="button" value="保存数据" id="setData">
+  <input type="button" value="获取数据" id="getData">
+  <input type="button" value="删除数据" id="removeData">
+</body>
+<script>
+  document.querySelector('#setData').onclick = () => {
+    var name = document.querySelector('#userName').value
+    window.sessionStorage.setItem('userName',name) //在谷歌上F12之后在Application中storage中的Session Storage中能看到
+  }
+  document.querySelector('#getData').onclick = () => {
+    var name = window.sessionStorage.getItem('userName')
+    alert(name)
+  }
+  document.querySelector('#removeData').onclick = () => {
+    window.sessionStorage.removeItem('userName')
+  }
+</script>
+</html>

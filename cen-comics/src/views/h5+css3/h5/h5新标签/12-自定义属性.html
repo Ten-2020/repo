@@ -1,0 +1,36 @@
+<!--
+ * @Author: 高腾
+ * @Description: 自定义属性
+ * @Date: 2020-03-27 13:02:24
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义属性</title>
+</head>
+<body>
+  <!-- 定义 -->
+  <!-- 规范:
+  1.data-开头
+  2.data-后面必须至少有一个字母,多个字母使用-连接
+  建议:
+  1.名称应该都使用小写--不要包含任何的大写字母
+  2.名称中不要使用任何的特殊符号
+  3.名称不要副作用纯数字 
+  -->
+  <p data-school-name="itCast">自定义属性</p>
+  <script>
+    window.onload = () => {
+      var p = document.querySelector('p')
+      // 获取自定义属性
+      // 将data-后面的单词使用camel命名法连接[必须使用camel命名法获取值否则有可能无法获取到值]
+      var schoolName = p.dataset['schoolName']  // itCast
+      var schoolName1 = p.dataset['schoolname'] // undefind
+      var schoolName2 = p.dataset['school-name']// undefind
+      console.log(schoolName)
+    }
+  </script>
+</body>
+</html>

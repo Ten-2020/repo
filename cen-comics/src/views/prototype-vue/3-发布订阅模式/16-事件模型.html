@@ -1,0 +1,89 @@
+<!--
+ * @Author: 高腾
+ * @Description: 探究更新部分数据-发布订阅者模式
+ * @Date: 2020-01-19 17:08:26
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>探究vue原码</title>
+</head>
+<body>
+  <script>
+    // 全局的 event 对象,提供 on,off,emit 方法
+    var event = (function(){
+      eventObjS = {}
+      return {
+         // 注册事件,可以连接注册多个事件
+        on:function(type,handler){
+          (eventObjS[type] || (eventObjS[type] = [])).push(handler)
+        },
+
+        // 移除事件,如果没有参数,移除所有事件,
+        // 如果只带有 事件名 参数,就移除这个事件名下的所有事件,
+        // 如果带有 两个 参数,那么就是表示 移除某一个事件的具体处理函数
+        off:function(type,handler){
+          if(arguments.length === 0){
+            eventObjS = {}
+          } else if(arguments.length === 1){
+            eventObjS[type] = []
+          } else if(arguments.length === 2){ // 移除 type 事件的 handler 函数
+            // 使用循环移除所有的 该函数 对应的type 事件
+            let _events = eventObjS[type]
+            if(!_events) return
+            // 倒着循环 数组 的序号不会受到影响
+            for(let i = _events.length - 1;i>=0;i--){
+              if(_events[i] === handler) {
+                _events.splice(i,1)
+              }
+            }
+          }
+        },
+
+        // 发射事件,触发事件,包装参数 传递给事件处理函数
+        emit:function(type){
+          // arguments 是伪数组,就是有元素,没有诸如:slice 等方法的.所以用了 Array 来给 arguments 添加上 slice 方法.这里非常炫酷!
+          // 在es6 中使用 Array.from 也是可以的.
+          let args = Array.prototype.slice.call(arguments,1) // 获得 arguments 从 1 开始后的所有参数,返回的是数组.就是除了 type 外的所有参数
+          let _events = eventObjS[type]
+          if(!_events) return
+          for(let i=0;i<_events.length;i++){
+            // 如果要绑定上下文就需要使用 call 或 apply
+            _events[i].apply(null,args)
+          }
+        }
+      }
+    }()) // 后面加个() 是为了立即执行
+
+    event.on("click",function(){
+      let i = 1 
+      console.info(`第$(i)次绑定click方法`)
+    })
+    event.on("click",function(){
+      let i = 2
+      console.info(`第$(i)次绑定click方法`)
+    })
+    event.on("focus",function(){
+      let i = 1
+      console.info(`第$(i)次绑定focus方法`)
+    })
+  </script>
+  <script>
+    // js 中 基本类型 是比较值
+    // js 中 引用类型 是比较 地址
+    // js 中 引用类型 与基本类型比较,是将其转换为 基本类型 再比较,
+    // 如果是 === 严格等于是不转换类型的
+    /* 
+    [] == [] // false.当js中读到第一个[]里会创建数组,第二个也一样,所以是false.下面也是一样的.
+    {} == {} // false
+    (()=>{}) == (()=>{}) // false
+    var arr = []
+    arr == arr // true.其它两个也是同理.因为引用是相同的.
+     */
+  </script>
+</body>
+</html>
+    

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    // "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "target": "ES6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/**/*", "public/api.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

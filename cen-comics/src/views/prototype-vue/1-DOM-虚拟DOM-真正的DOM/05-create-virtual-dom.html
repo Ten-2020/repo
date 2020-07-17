@@ -1,0 +1,116 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-01-14 17:29:54
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>探究vue原码</title>
+  </head>
+  <body>
+    <!-- 这个会存在一个换成的文本节点,同理,下面换成都会存在这样一个节点 -->
+    <div id="root">
+      <div class="c1"> 
+        <div title="tt1">hello1</div>
+        <div title="tt2">hello2</div>
+        <div title="tt3">hello3</div>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      // 为什么要使用虚拟DOM? 提高性能
+      // <div /> => {tag:'div'}
+      // 文本节点 => {tag:undefined,value:'文本节点'}
+      // <div title="1" class="c" /> =>{tag:'div',data:{title:'1',class:'c'}}
+      // <div><div /></div> => {tag:'div',children:[{tag:'div'}]}
+      // 上面就是虚拟DOM,是缓存的.
+
+      class VNode { // 类里面的this指向的是调用的上下文
+        constructor(tag,data,value,type) {
+          this.tag = tag && tag.toLowerCase() // && 如果左侧是真值就返回右侧值,假的,就返回左侧值
+          this.data = data
+          this.value = value
+          this.type = type
+          this.children = []
+          // this.appendChild = this.appendChild.bind(this); // appendChild中this显式绑定//这样this就指向这个类
+        }
+        appendChild(vNode){
+          this.children.push( vNode)
+        }
+      }
+      // let vNode = new VNode(undefined,undefined,undefined,undefined)
+      // const {appendChild} = vNode
+      // appendChild() //运行环境是全局环境, 所以class 的appendChild函数里的this就根据是否是严格模式而指向全局环境或者undefined
+
+      // 使用递归来遍历 DOM 元素,生成虚拟 DOM
+      // Vue 中的源码使用的 栈结构,使用栈存储 父元素来实现递归生成
+      function getVNode(node){
+        console.info('转换成虚拟DOM开始的节点信息', node)
+        let nodeType = node.nodeType
+        let _vNode = null
+        if(nodeType === 1){ // 元素
+          let nodeName = node.nodeName
+          let attrs = node.attributes
+          let _attrObj = {}
+          for (let i=0;i<attrs.length;i++){// attrs[i] 属性节点{nodeType ==2}
+            _attrObj[attrs[i].nodeName] = attrs[i].nodeValue // 这个开始是没有属性的,所以会自动生成属性,牛皮!
+          }
+          _vNode = new VNode(nodeName,_attrObj,undefined,nodeType) // 把所有的属性复制一遍创建一个新的节点
+          // 考虑 node 的子元素
+          let childNodes = node.childNodes
+          for(let i =0;i<childNodes.length;i++){
+            _vNode.appendChild(getVNode(childNodes[i]))
+          }
+        }else if(nodeType === 3){ // 文本节点
+          _vNode = new VNode(undefined,undefined,node.nodeValue,nodeType)
+        }
+        return _vNode
+      }
+
+      let root = document.querySelector('#root')
+      let vRoot = getVNode(root)
+      console.log('生成的虚拟DOM', vRoot)
+
+      // 最后:将 vNode 转换成真正的 DOM
+      function parseVNode(vNode){ 
+        // 跟上面的方法差不多
+        // 就是将new VNode改成document.createElement之类的.
+        console.info('转换成真正的DOM节点信息', vNode)
+        let type = vNode.type
+        let _node = null
+        if(type === 3){
+          return document.createTextNode(vNode.value)
+        } else if(type === 1) {
+          _node = document.createElement(vNode.tag)
+
+          //属性
+          let data = vNode.data
+          Object.keys(data).forEach((key)=>{
+            let attrName = key
+            let attrValue = data[key]
+            _node.setAttribute(attrName,attrName)
+          })
+          // 子元素
+          let children = vNode.children
+          children.forEach(subVNode=>{
+            _node.appendChild(parseVNode(subVNode)) // 递归转换子元素(虚拟DOM)
+          })
+          return _node
+        }
+      }
+      // 递归确实会消耗内存,但是不用也没有别的好办法
+      // 在真正的 Vue 中也是要使用 递归 + 栈 数据类型
+      let dom2 = parseVNode(vRoot)
+
+      // 只要将转换后的DOM打印出来看看与原来的DOM是否一样
+      console.log('最后生成的DOM', dom2)
+    </script>
+  </body>
+</html>

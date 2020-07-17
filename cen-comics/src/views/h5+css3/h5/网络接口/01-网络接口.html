@@ -1,0 +1,26 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-27 13:23:32
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网络接口</title>
+</head>
+<body>
+  <script>
+    // 1.ononline:网络连通的时候触发这个事件
+    window.addEventListener('online',() => {
+      alert('网络连通了')
+    })
+    /* 把wifi断开和连接就会触发上下两个方法 */
+    // 2.onoffline:网络断开时触发
+    window.addEventListener('offline',() => {
+      alert('网络断开了')
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-26 10:06:46
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <fieldset>
+      <legend>学生档案</legend>
+      <label for="userName">姓名:</label>
+      <!-- 上面的for是跟下面的id相关联的,就是点姓名,会自动聚焦到下面的输入框 -->
+      <input type="text" name="userName" id="userName" placeholder="请输入用户名">
+      <label for="userPhone">手机号码:</label>
+      <input type="tel" name="userPhone" id="userPhone" placeholder="请输入手机号码" pattern="^1/d{10}$">
+      <label for="userEmail">邮箱地址:</label>
+      <input type="email" name="userEmail" id="userEmail" placeholder="请输入邮箱地址">
+      <label for="userCollage">所属学院:</label>
+      <input type="text" name="userCollage" id="userCollage" list="collageList">
+      <datalist id='collageList'>
+        <option value="font end"></option>
+        <option value="java"></option>
+        <option value="c++"></option>
+      </datalist>
+      <label for="achievement">入学成绩</label>
+      <input type="number" name="achievement" id="achievement" max="100" min="0" value="0">
+      <label for="level">基础水平</label>
+      <meter id="level" max="100" min="0" low="60" high="90"></meter>
+      <label for="inTime">入学日期</label>
+      <input type="date" id="inTime" name="inTime">
+      <label for="leaveTime">毕业日期</label>
+      <input type="date" name="leaveTime" id="leaveTime">
+      <input type="submit">
+    </fieldset>
+  </form>
+</body>
+<script>
+  document.getElementById("achievement").oninput = function(){
+    document.getElementById("level").value = this.value
+  }
+</script>
+<style>
+  form > fieldset {
+    padding: 20px;
+  }
+  form > fieldset > meter{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 0;
+    border: none;
+    /* 这里是去掉border,因为没有去掉会内陷 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    /* padding-left: 5px; */
+    /* width=内容+padding+border */
+    box-sizing:border-box;
+  }
+  form > fieldset > input{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin: 10px 0;
+    border: none;
+    /* 这里是去掉border,因为没有去掉会内陷 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left: 5px;
+    /* width=内容+padding+border */
+    box-sizing:border-box;
+  }
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  form{
+    width: 600px;
+    margin: 20px auto;
+  }
+</style>
+</html>

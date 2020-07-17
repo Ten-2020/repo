@@ -1,0 +1,51 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-02-26 10:42:58
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+</head>
+
+<body>
+  <script>
+     const lilei = {
+    id:2,
+    say: function(){
+        setTimeout(function(){
+            console.log('id: ',this.id)
+        },50)
+    },
+    sayWithThis: function(){
+        let that = this ;
+
+        setTimeout(function(){
+            console.log('this id: ',that.id)
+        },500)
+    },
+    sayWithArrow: function(){
+        setTimeout(()=>{
+            console.log('arrow id: ', this.id)
+        },1500)
+    },
+    sayWithGlobalArrow: ()=>{
+        setTimeout(()=>{
+            console.log('global arrow id :', this.id)
+        },2000)
+    }
+}
+
+lilei.say();
+lilei.sayWithThis();
+lilei.sayWithArrow();
+lilei.sayWithGlobalArrow();
+  </script>
+</body>
+
+</html>

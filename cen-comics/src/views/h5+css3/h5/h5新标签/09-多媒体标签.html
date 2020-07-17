@@ -1,0 +1,46 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-26 10:58:29
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- embed:直接插入视频文件:它的本质是调用本机上已经安装的软件,有兼容性 -->
+  <!-- flash插件: 如果要使用就要安装flash 1.学习flash,增加使用成本 2.苹果设备不支持flash -->
+  <!-- 现在h5用下面的audio/video代替上面的flash -->
+  <!-- audio:音频 
+  src:播放的音频文件的路径
+  controls:音频播放器的控制面板
+  autoplay:自动播放(这个自动播放没有实现,据说很多浏览器都禁掉了这个功能)
+  -->
+  <audio src="./mp3/胡夏、郁可唯 - 知否知否.mp3" controls autoplay></audio>
+  <!-- video:视频 
+  loop:循环
+  width:宽度
+  height:高度
+  poster:当视频还没有完全下载,或者用户还没有点击播放前的默认显示的封面.默认是显示当前视频文件的第一副画面
+  -->
+  <!-- 注意事项:当设置宽度的时候,一般情况下只会设置宽度或者高度,让其自动的等比缩放.
+  如果同时设置宽度和高度,那么视频并不会真正的调整到设置的宽高,除非设置的值刚好是等比例的.
+  -->
+  <video src="./mp3/安全漏洞问题整改培训.mp4" poster="./mp3/南山的部长们.jpg" 
+  controls
+  width="400px"
+  height="400px"
+  autoplay
+  ></video>
+  <!-- 重点说明:source的使用:因为不同浏览器支持的视频文件格式不一样,所以我们会进行视频添加的时候,需要考虑到浏览器
+  是否支持.我们可以准备多个格式的视频文件,让浏览器自动的选择 -->
+  <video controls width="400px" height="400px">
+    <source src="./mp3/sp.flv" type="video/flv">
+    <source src="./mp3/安全漏洞问题整改培训.mp4" type="video/mp4" >
+      您的浏览器不支持当前的视频播放
+  </video>
+</body>
+</html>

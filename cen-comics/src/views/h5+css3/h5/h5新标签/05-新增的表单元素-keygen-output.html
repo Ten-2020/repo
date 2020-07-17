@@ -1,0 +1,29 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-24 17:38:34
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="" >
+    用户名: <input type="text" name="userName"> <br>
+    密码:   <input type="password" name="userPsw"> <br>
+    <!-- 这个keygen在谷歌与IE11中都显示不出来,而且这里报红,不知何故 -->
+    加密:   <keygen name="security" /> <br>
+    <!-- keygen已经被废弃 -->
+    <input type="submit">
+  </form>
+  <!-- 
+    显示输出信息:只能显示不能修改
+    1.语义性更强
+    2.值需要你去设置,不能自动计算
+   -->
+  <output>总金额: $100.oo</output>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-01-15 16:13:58
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>探究vue原码</title>
+  </head>
+  <body>
+    <script>
+      let tags = 'div,p,a,img,ul,li'.split(',')
+
+      function makeMap(keys){
+        let set  = {} // 集合
+        tags.forEach(key => set[key] = true)
+        return function(tagName){
+          return !!set[tagName.toLowerCase()] // 如果是自定义的组件,就会返回!!undefined,也就是false.
+        }
+      }
+
+      let isHTMLTag = makeMap(tags) // 返回的是个函数,就是上面方法第一次返回的东西
+      // 如果10个标签需要判断,那么就只需要循环一次了.
+      // 首先用 key-value 这种查询方式是比数组查询的方式快的多.
+    </script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-30 12:41:22
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="div">
+    <div class="div1" id="div1">
+      <!-- h5:如果想拖拽元素,就必须为元素添加draggable="true",图片和超链接默认就可以拖拽 -->
+      <p id="pe" class="pe" draggable>试着把我拖过去</p>
+    </div>
+    <div class="div2" id="div2"></div>
+    <div class="div3" id="div3"></div>
+    <div class="div4" id="div4"></div>
+  </div>
+</body>
+<script>
+  var dragObj = null
+    document.ondragstart = (e) => {
+      console.log('被拖拽元素',e.target);
+      e.target.style.opacity = 0.5
+      e.target.parentNode.style.borderWidth = "5px"
+      dragObj = e.target
+    }
+    document.ondragend = (e) => {
+      e.target.style.opacity = 1
+      e.target.parentNode.style.borderWidth = "1px"
+    }
+    document.ondragleave = () => { //当鼠标离开时拖拽元素时调用
+      console.log('被拖拽元素','ondragleave');
+    }
+    document.ondrag = () => { //就是拖拽的过程中一直会打印
+      // console.log('被拖拽元素','ondrag');
+    }
+    document.ondragenter = (e) => {
+      console.log('目标元素',e.target);
+    }
+    document.ondragover = (e) => { //就是拖拽到div2后就会一直打印
+      e.preventDefault() //阻止浏览器的默认行为
+    }
+    document.ondrop = (e) => {
+      e.target.appendChild(dragObj) // 添加被拖拽的元素当前目标元素(左边的会消失,因为appendChild这个方法会删掉之前已经存在的p)
+    }
+    document.ondragleave = () => {
+      console.log('目标元素','ondragleave');
+    }
+</script>
+<style>
+  .pe{
+    background-color: yellow;
+  }
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .div{
+    display: flex;
+  }
+  .div1{
+    width: 200px;
+    height: 200px;
+    border: 1px solid pink;
+  }
+  .div2{
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+    border: 1px solid purple;
+  }
+  .div3{
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+    border: 1px solid purple;
+  }
+</style>
+</html>

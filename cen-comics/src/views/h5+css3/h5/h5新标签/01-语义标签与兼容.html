@@ -1,0 +1,68 @@
+<!--
+ * @Author: 高腾
+ * @Description: 这是学习h5+css3建立的文件
+ * @Date: 2020-03-23 15:42:40
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>语义标签与兼容</title>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+            }
+            header{
+              display: block;
+                width: 100%;
+                height: 100px;
+                background-color: red;
+            }
+            nav{
+              width: 100%;
+              height: 36px;
+              background-color:green;
+            }
+            /* IE8会将行这些语义标签看成是行级元素
+               行级元素在设置高度的时候是失效的,所以如果要在IE9及以上的版本中使用,
+               就得将行级元素转换为块级元素:display: block;
+               IE8是完全不支持语义标签(不支持h5)
+             */
+            main{
+              display: block;
+              width: 100%;
+              height: 500px;
+              background-color: #ccc;
+            }
+            main > article{
+              width: 80%;
+              height: 100%;
+              background-color: purple;
+              float: left;
+            }
+            main > aside{
+              width: 20%;
+              height: 100%;
+              background-color: pink;
+              float: right;
+            }
+        </style>
+	</head>
+	<body>
+    <!--  IE8:默认的标签的类型是行级元素,如果想要在IE8中实现的话,如下所示:
+    第一种方式:就是手动创建标签 -->
+    <script>
+      document.createElement("header") // 还要在css中的header中添加:display: block;
+    </script>
+    <!--  第二种方式:引入第三方插件:如下: (引入这个就能做到兼容) -->
+    <script src="../js/html5shiv.min.js"></script>
+    <header>页眉</header>
+    <nav>导航</nav>
+    <main>
+      <article>左边</article>
+      <aside>右边</aside>
+    </main>
+    <footer>底部</footer>
+	</body>
+</html>

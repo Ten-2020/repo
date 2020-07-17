@@ -1,0 +1,35 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-03-25 10:01:07
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    用户名:<input type="text" name="userName" id="userName">   <br>
+    电话:  <input type="tel"  name="userPhone" id="userPhone" pattern="^1\d{10}$"> <br>
+    <input type="submit">
+  </form>
+<script>
+  // oninput：监听当前指定元素内容的改变：只要内容改变(添加内容，删除内容)，就会触发这个事件
+  document.getElementById("userName").oninput = function() {
+    console.log('oninput',this.value)
+  }
+  // 当用ctrl+v来复制内容时，上面调用一次，下面调用两次，因为有两个键被触发.
+  // onkeyup:键盘弹出的时候触发：每一个键的弹出都会触发一次.
+  document.getElementById("userName").onkeyup = function () {
+    console.log('onkeyup',this.value)
+  }
+  // oninvalid:当验证不通过时触发
+  document.getElementById("userPhone").oninvalid = function () {
+    this.setCustomValidity('请输入合法的11位手机号')// 设置默认的提示信息
+  }
+</script>
+</body>
+</html>

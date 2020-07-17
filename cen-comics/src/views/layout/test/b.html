@@ -1,0 +1,55 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-02-27 09:53:33
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>test</title>
+ </head>
+ <body>
+   <script>
+      // const a = [1,2,3,4,5]
+      // const b = [2,3,1,0,5]
+      // let c = a.find(i=>!b.includes(i))
+      // console.info(c)
+      // var x=1
+      // var obj ={
+      //   x:2,
+      //   fun:function(){
+      //     var x =3
+      //     return this.x
+      //   }
+      // }
+      // var fun = obj.fun
+      // console.log(obj.fun(), fun())
+
+      // for(var i =1; i <4; i++) {
+      //   setTimeout(function() {
+      //     console.log(i)
+      //   },0)
+      // }
+      for(let i=1;i<=5;i++){
+        (function () {
+            setTimeout(function timer() {
+                console.log(i)
+            },i*1000)
+        })()
+      }
+      // for(var i=1;i<=5;i++){
+      //   (function () {
+      //       var j=i;
+      //       setTimeout(function timer() {
+      //           console.log(j);
+      //       },j*1000);
+      //   })();
+      // }
+   </script>
+</body>
+
+</html>
