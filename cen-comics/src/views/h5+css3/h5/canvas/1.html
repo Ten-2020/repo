@@ -1,0 +1,62 @@
+<!--
+ * @Author: 高腾
+ * @Description: 
+ * @Date: 2020-07-24 10:17:35
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript">
+    function draw() {
+      let canvas = document.querySelector('#turorial')
+      if (canvas.getContext) { // 支持
+        let ctx = canvas.getContext('2d')
+        // 矩形(通过绘制原点以及长宽来实现)
+        // ctx.fillStyle = "rgb(200,0,0)"
+        // ctx.fillRect(10, 10, 55, 50) //clearRect|strokeRect
+        // ctx.fillStyle = "rgba(0,0,200,0.5)"
+        // ctx.fillRect(30, 30, 55, 190)
+        // 三角形(通过绘制所有的点来实现)
+        // ctx.beginPath()
+        // ctx.moveTo(75,50)
+        // ctx.lineTo(100,75)
+        // ctx.lineTo(100,25)
+        // ctx.lineTo(75,50) //closePath()这个也能实现闭合
+        // ctx.stroke() // 如果已经是闭合的就使用stroke()
+        // 用fill()不仅会来闭合所有的点,还会使闭合线之内的空白都填充了
+        // 圆形(画个脸)
+        // ctx.beginPath()
+        // ctx.arc(75, 75, 50, 0, Math.PI * 2, true) // 原点坐标,半径,角度,逆时针
+        // ctx.moveTo(110, 75) // 这些如果去掉,就会出现上下两个图形的结束与开始节点的连线
+        // ctx.arc(75, 75, 35, 0, Math.PI, false)
+        // ctx.moveTo(65, 65)
+        // ctx.arc(60, 65, 5, 0, Math.PI * 2, true)
+        // ctx.moveTo(95, 65)
+        // ctx.arc(90, 65, 5, 0, Math.PI * 2, true)
+        // ctx.stroke()
+        // 二次贝塞尔曲线
+        ctx.beginPath()
+        ctx.moveTo(75, 25)
+        ctx.quadraticCurveTo(25,25,25,62.5)
+        ctx.stroke()
+      } else {
+
+      }
+    }
+  </script>
+  <style type="text/css">
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body onload="draw()">
+  <canvas id="turorial" width="150" height="150"></canvas>
+</body>
+
+</html>
