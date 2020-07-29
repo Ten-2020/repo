@@ -1,0 +1,110 @@
+<!--
+ * @Author: 高腾
+ * @Description: 动画
+ * @Date: 2020-07-28 11:08:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+</body>
+<script type="text/javascript">
+  let x = 255, y = 255;
+  let ctx;
+  let canvas = document.querySelector('#canvas')
+  if (canvas.getContext) { // 支持
+    ctx = canvas.getContext('2d')
+  }
+  function rect(ctx) {
+    // 1.画一个圆,颜色从深至浅
+    ctx.save()
+    ctx.beginPath()
+    let lingrad1 = ctx.createLinearGradient(40, 0, -40, 40)
+    lingrad1.addColorStop(0, '#26C000')
+    lingrad1.addColorStop(0.5, '#fff')
+    ctx.lineWidth = 5
+    ctx.strokeStyle = lingrad1
+    ctx.translate(75, 75)
+    ctx.arc(0, 0, 1, 0, Math.PI * 2, true)
+    ctx.moveTo(-40, 0)
+    ctx.arc(0, 0, 40, Math.PI, Math.PI * 2, false)
+    ctx.stroke()
+    ctx.restore()
+    ctx.save()
+    ctx.beginPath() // 之前的两个圆环的颜色是一样的,加了这个之后就有分别了
+    // beginPath() 方法开始新的一条路径，或重置当前的路径
+    let lingrad = ctx.createLinearGradient(50, 0, 50, 50)
+    lingrad.addColorStop(0, '#00ABEB')
+    lingrad.addColorStop(1, '#bbb')
+    ctx.lineWidth = 5
+    ctx.strokeStyle = lingrad
+    ctx.translate(75, 75)
+    // ctx.moveTo(50, 0)
+    ctx.rotate(Math.PI * 2 / (3))
+    ctx.arc(0, 0, 50, Math.PI - Math.PI / 3, Math.PI * 2 - Math.PI / 3, false)
+    ctx.stroke()
+    ctx.restore()
+  }
+  function rect_cir(ctx) {
+    for (let i = 1; i < 11; i++) {
+      ctx.save()
+      ctx.beginPath()
+      let lingrad = ctx.createLinearGradient(10 * i, 0, 10 * i, 10 * i)
+      // lingrad.addColorStop(0, '#00ABEB')
+      lingrad.addColorStop(0, 'rgb(' + (25 * i) + ',' + (255 - 25 * i) + ',255)')
+      lingrad.addColorStop(1, '#bbb')
+      ctx.lineWidth = 5
+      ctx.strokeStyle = lingrad
+      ctx.translate(255, 255)
+      ctx.rotate(Math.PI * 2 / (Math.random()))
+      ctx.arc(0, 0, 11 * i, Math.PI - Math.PI / 2, Math.PI * 2 - Math.PI / 10, false)
+      ctx.stroke()
+      ctx.restore()
+    }
+  }
+  function rect_move() {
+    ctx.save()
+    ctx.translate(x, y)
+    for (let i = 1; i < 11; i++) {
+      ctx.beginPath()
+      let lingrad = ctx.createLinearGradient(10 * i, 0, 10 * i, 10 * i)
+      // lingrad.addColorStop(0, '#00ABEB')
+      lingrad.addColorStop(0, 'rgb(' + (25 * i) + ',' + (255 - 25 * i) + ',255)')
+      lingrad.addColorStop(1, '#bbb')
+      ctx.lineWidth = 5
+      ctx.strokeStyle = lingrad
+      ctx.rotate(Math.PI * 2 / (Math.random()))
+      ctx.arc(0, 0, 11 * i, Math.PI - Math.PI / 2, Math.PI * 2 - Math.PI / 10, false)
+      ctx.stroke()
+    }
+    ctx.restore()
+    // window.requestAnimationFrame(rect_move)
+  }
+  function draw() {
+    // window.onclick = function (e) {
+      window.onmousemove = function (e) {
+      // console.log('移动的位置', e, e.clientX, e.clientY)
+      // ctx.clearRect(0, 0, canvas.width, canvas.height) 
+      // 下面的fillStyle与fillRect替代这个来实现清除之前的图画的效果,附带有替换过程的效果
+      // ctx.fillStyle = 'rgba(168,160,244,0.3)'
+      ctx.fillStyle = 'rgba(168,160,144,0.3)'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      x = e.clientX
+      y = e.clientY
+      window.requestAnimationFrame(rect_move)
+    }
+  }
+  rect_move()
+  draw()
+</script>
+
+</html>

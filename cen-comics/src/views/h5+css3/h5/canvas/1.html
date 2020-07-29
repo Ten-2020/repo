@@ -39,10 +39,76 @@
         // ctx.arc(90, 65, 5, 0, Math.PI * 2, true)
         // ctx.stroke()
         // 二次贝塞尔曲线
-        ctx.beginPath()
-        ctx.moveTo(75, 25)
-        ctx.quadraticCurveTo(25,25,25,62.5)
-        ctx.stroke()
+        // ctx.beginPath()
+        // ctx.moveTo(75, 25)
+        // ctx.quadraticCurveTo(25,25,25,62.5)
+        // ctx.stroke()
+        // 颜色渐变(画很多个漂亮的圆形)
+        // for (let i = 0; i < 6; i++) {
+        //   for (let j = 0; j < 6; j++) {
+        //     // ctx.strokeStyle = 'rgb(0,' + Math.floor(255 - 42.5 * i) + ',' + Math.floor(255 - 42.5 * i) + ')'
+        //     ctx.strokeStyle = 'rgb(0,' + Math.floor(150 - 30 * i) + ',' + Math.floor(150 - 30 * i) + ')'
+        //     ctx.beginPath()
+        //     ctx.arc(15 + 30 *  j, 15 + 30 * i, 11, 0, Math.PI * 2, true)
+        //     ctx.stroke()
+        //   }
+        // }
+        // 渐变 Gradients
+        // let lingrad = ctx.createLinearGradient(0, 0, 0, 150);
+        // lingrad.addColorStop(0, '#00ABEB');
+        // lingrad.addColorStop(0.5, '#fff');
+        // lingrad.addColorStop(0.5, '#26C000');
+        // lingrad.addColorStop(1, '#fff');
+
+        // let lingrad2 = ctx.createLinearGradient(0, 50, 0, 95)
+        // lingrad2.addColorStop(0.5, '#000');
+        // lingrad2.addColorStop(1, 'rgba(0,0,0,0)');
+
+        // ctx.fillStyle = lingrad;
+        // ctx.strokeStyle = lingrad2;
+
+        // ctx.fillRect(10, 10, 130, 130);
+        // ctx.strokeRect(50, 50, 50, 50);
+        // 填充(fill)
+        // ctx.beginPath()
+        // ctx.arc(50, 50, 30, 0, Math.PI * 2, true)
+        // ctx.arc(50, 50, 15, 0, Math.PI * 2, true)
+        // ctx.fill("evenodd") // 只填充两个圆之间的部分
+        // 移动 Translating
+        // for (let i = 0; i < 3; i++) {
+        //   for (let j = 0; j < 3; j++) {
+        //     ctx.save()
+        //     ctx.fillStyle = 'rgb(0,' + Math.floor(150 - 50 * i) + ',' + Math.floor(150 - 50 * i) + ')'
+        //     ctx.translate(10 + j * 50, 10 + i * 50)
+        //     ctx.fillRect(0, 0, 15, 15)
+        //     ctx.restore()
+        //   }
+        // }
+        // 旋转 Rotating
+        // ctx.translate(75, 75)
+        // for (var i = 1; i < 2; i++) { // Loop through rings (from inside to out)
+        //   ctx.save()
+        //   ctx.fillStyle = 'rgb(' + (51 * i) + ',' + (255 - 51 * i) + ',255)'
+
+        //   for (var j = 0; j < i * 6; j++) { // draw individual dots
+        //     ctx.rotate(Math.PI * 2 / (i * 6))
+        //     ctx.beginPath()
+        //     ctx.arc(0, i * 25, 5, 0, Math.PI * 2, true);
+        //     ctx.fill()
+        //   }
+        //   ctx.restore()
+        // }
+        // 下面是自己实践写的一个圈的圆
+        ctx.translate(75, 75)// 给一个原点(现在75,75是原点)
+        // ctx.save()
+        for (let i = 0; i < 5; i++) {
+          ctx.rotate(Math.PI * 2 / (6))
+          ctx.beginPath() // 就像重置坐标系一样
+          ctx.arc(0,12.5,5,0,Math.PI*2,true) // 旋转了角度之后,这个坐标就是旋转了角度之后的了
+          // 如:之前坐标系是y轴是正向南北的,现在旋转角度之后就,就发生了偏移,整个坐标系发生了偏移
+          ctx.fill()
+        }
+        ctx.restore()
       } else {
 
       }
