@@ -50,7 +50,6 @@ export default {
     },
   },
   created () {
-    // this.fun_val = this.commons.trans
   },
   methods: {
     copyText (e) {
