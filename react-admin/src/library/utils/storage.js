@@ -103,7 +103,7 @@ export function multiRemove(keys) {
 }
 
 /**
- * sessionStorage 封装，具有localStorage同样方法
+ * sessitonStorage 封装，具有localStorage同样方法
  *
  * @type {{setItem(*=, *=): void, getItem(*=): *, clear(): void, removeItem(*=): void, multiGet(*): *, multiRemove(*): void}}
  */

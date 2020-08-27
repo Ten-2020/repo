@@ -61,7 +61,7 @@ export function getUsersByPageSize(pageSize) {
             //
             // address: Mock.mock('@county(true)'),
             // 'age|18-60': 1,
-            // 'group|1': ['jia', 'yan'],
+            // 'group|1': ['jiagou', 'yanfa'],
             // birth: random.date(),
             // sex: random.integer(0, 1),
         }));
