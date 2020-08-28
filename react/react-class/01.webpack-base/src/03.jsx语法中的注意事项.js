@@ -43,7 +43,8 @@ ReactDOM.render(
   }))}
   <hr/>
   <p className="myEle">!!!!</p> 
-  {/* 用className 来代替 class 用 htmlFor 代替 for */}
+  {/* 用className 来代替 class, 用 htmlFor 代替 for,是因为class和for都是js的保留关键字 */}
+  {/* 注释:在render中也即写jsx时,推荐用这种形式注释 */}
   <label htmlFor="ooo">1111</label>
 </div>
   , document.getElementById('app'))
