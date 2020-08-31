@@ -1,16 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Button, Input } from 'antd'
 export default class Gather extends Component {
-
-  render () {
-    let handleClick = function () {
-      this.refs.inputText.focus()
-      // 这个ref是用来获取实例dom的,即使这个方法都能调到,那说明input已经渲染完成了.
-    }
+  constructor(props) {
+    super(props)
+    this.state = { liked: 'ab' }
+  }
+  handleClick = () => {
+    // this.refs.inputText.focus()
+    // 这个ref是用来获取实例dom的,即使这个方法都能调到,那说明input已经渲染完成了.
+    this.setState({ liked: 'has' })
+  }
+  render() {
+    const text = this.state.liked === 'has' ? 'like' : 'not like'
     return (
       <div>
-      <Input type="text" ref="inputText"></Input>
-      <Button type="primary" onClick={this.handleClick}>第一个按钮</Button>
+        <Input type="text" ref="inputText"></Input>
+        <Button type="primary" onClick={this.handleClick}>
+          第一个{text}按钮
+        </Button>
+        <p>text</p>
       </div>
       // <ol>
       //   {
