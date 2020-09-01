@@ -34,4 +34,4 @@ ReactDOM.render(<div>{arr}</div>, document.getElementById('example'))
 - 在组件定义方法不再用 名称:function()的写法,而是直接用名称(),在方法的最后也不能有逗号.
 - 你需要通过 bind 来绑定 this 引用,或者使用箭头函数(它会绑定当前 scope 的 this 引用)来调用.
 
-###　听说可以,试下,再试下,来了,好的
+###　听说可以,试下,再试下,来了,好的,再来
