@@ -5,36 +5,17 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './app.jsx'
+ReactDOM.render(<App></App>,document.getElementById('app'))
 
-var NodeList = React.createClass({
-  render: function () {
-    return (
-      <ol>
-        {
-          React.Children.map(this.props.children, function (child) {
-            return <li> {child}</li>
-          })
-        }
-      </ol>
-    )
-  }
-})
-
-let NodeList = function () {
-  return (
-    <ol>
-      {
-        React.Children.map(this.props.children, function (child) {
-          return <li> {child}</li>
-        })
-      }
-    </ol>
-  )
-}
-
-ReactDOM.render(
-  <NodeList>
-    <span>你好</span>
-    <span>兄弟</span>
-  </NodeList>
-  , document.getElementById('app'))
+// function tick(){
+//   const ele = (// 这里的括号,就像计算的时候,只是为了表示括号内是一个整体
+//     <div>
+//       <h1>Hello.world</h1>
+//       <h2>It is {new Date().toLocaleDateString()}</h2>
+//       <h2>It is {new Date().toLocaleTimeString()}</h2>
+//     </div>
+//   )
+//   ReactDOM.render(ele,document.getElementById('app'))
+// }
+// setInterval(tick,1000)
