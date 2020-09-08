@@ -1,81 +1,60 @@
 import React from 'react';
 import './App.less';
 import {
-  BrowserRouter as Router,Switch,Route,Link,useRouteMatch,
-  useParams} from "react-router-dom"
-
-export default function App(){
-  return(
+  BrowserRouter as Router, Switch, Route, Link
+} from "react-router-dom"
+import Steak from './views/component/beef/steak/steak.jsx'
+import Sirloin from './views/component/beef/sirloin/sirloin.jsx'
+import FatCattle from './views/component/beef/fatCattle/fatCattle.jsx'
+export default function App () {
+  return (
     <Router>
       <div>
         <nav>
+          <h1>客官,欢迎光临我们牛肉店,您准备吃点什么呢?</h1>
+          这是我们的菜单:
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/sirloin">牛腩</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/steak">牛排</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
+              <Link to="/fatCattle">肥牛</Link>
             </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/about">
-            <About></About>
+          <Route path="/sirloin">
+            <Steak></Steak>
           </Route>
-          <Route path="/users">
-            <Users></Users>
+          <Route path="/steak">
+            <Sirloin></Sirloin>
           </Route>
-          <Route path="/">
-            <Home></Home>
-          </Route>
-          <Route path="/Topics">
-            <Topics></Topics>
+          <Route path="/fatCattle">
+            <FatCattle></FatCattle>
           </Route>
         </Switch>
       </div>
     </Router>
   )
 }
-let Home = ()=>(<h2>Home</h2>)
-let About = ()=>(<h2>About</h2>)
-let Users = ()=>(<h2>Users</h2>)
-
-function Topics() {
-  let match = useRouteMatch();
-
-  return (
-    <div>
-      <h2>Topics</h2>
-
-      <ul>
-        <li>
-          <Link to={`${match.url}/components`}>Components</Link>
-        </li>
-        <li>
-          <Link to={`${match.url}/props-v-state`}>
-            Props v. State
-          </Link>
-        </li>
-      </ul>
-      <Switch>
-        <Route path={`${match.path}/:topicId`}>
-          <Topic />
-        </Route>
-        <Route path={match.path}>
-          <h3>Please select a topic.</h3>
-        </Route>
-      </Switch>
-    </div>
-  );
-}
-
-function Topic() {
-  let { topicId } = useParams();
-  return <h3>Requested topic ID: {topicId}</h3>;
-}
+// let Fir = () => (
+//   <h2>
+//     <p>牛腩好嚼吗？</p>
+//     <p>嗯嗯</p>
+//   </h2>
+// )
+// let Sed = () => (
+//   <h2>
+//     <p>牛排好煎吗？</p>
+//     <p>哈哈哈哈</p>
+//   </h2>
+// )
+// let Thi = () => (
+//   <h2>
+//     <p>肥牛好吃吗？</p>
+//     <p>哼哼！！！</p>
+//   </h2>
+// )
