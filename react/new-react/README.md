@@ -1,4 +1,8 @@
-### 8-31 学习
+### 9-2
+
+
+
+### 8-31 JSX 语法规则
 
 - JSX 的基本语法规则：遇到 HTML 标签（以  <  开头），就用 HTML 规则解析
 - 遇到代码块（以  {  开头），就用 JavaScript 规则解析
@@ -33,3 +37,9 @@ ReactDOM.render(<div>{arr}</div>, document.getElementById('example'))
 - 我们通过定义一个继承自 React.Component 的 class 来定义一个组件类
 - 在组件定义方法不再用 名称:function()的写法,而是直接用名称(),在方法的最后也不能有逗号.
 - 你需要通过 bind 来绑定 this 引用,或者使用箭头函数(它会绑定当前 scope 的 this 引用)来调用.
+
+### 8-31 react 组件生命周期
+
+- mounting:  已插入真实 DOM
+- updating:  正在被重新渲染
+- unmounting:已移出真实DOM
