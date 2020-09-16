@@ -17,15 +17,21 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 module.exports = {
   mode: 'production', // development production // 这个必选项
-  entry:"./src/index.js", // 这个要加上,要不就会报错.
+  entry: "./src/index.js", // 这个要加上,要不就会报错.
   plugins: [
     htmlPlugin
   ],
-  module:{ // 所有第三方 模块的配置规则
-    rules:[ // 第三方茶杯规则
-      { test: /\.js|jsx$/,use:'babel-loader',exclude:/node_modules/}, // 千万别忘记添加exclude 排除项
+  module: { // 所有第三方 模块的配置规则
+    rules: [ // 第三方茶杯规则
+      { test: /\.js|jsx$/, use: 'babel-loader', exclude: /node_modules/ }, // 千万别忘记添加exclude 排除项
 
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'], // 表示这几个文件的后缀名,可以省略.
+    alias:{
+      '@':path.join(__dirname,'./src') // 这样,@就表示项目根目录中src的这一层路径
+    }
   }
 }
 

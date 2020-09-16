@@ -1,7 +1,8 @@
 import React from 'react'
-import Home from './view/home.jsx'
-import Nav from './view/nav.jsx'
-import State from './view/state.jsx'
+import Home from './view/home'
+import Nav from './view/nav'
+// 注意:这里的@符号,就是src这一层
+import State from '@/view/state'
 
 class App extends React.Component {
   render () {

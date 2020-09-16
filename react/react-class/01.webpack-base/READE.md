@@ -20,14 +20,28 @@
 - 安装 babel 的时候,现在都是 "babel-loader": "^8.0.6" 版本,参考网址:https://www.cnblogs.com/QianDingwei/p/10800795.html
 - 版本 8 都是 '@babel/preset-react' 这种形式,就是在前面加个@
 - 察看 babel 官网之后发现添加这条命令才行:npm install --save-dev @babel/preset-react
-- 01/02/03.*.js都是之前写在index.js中的,一个文件就是一节的内容,一节完后就放在这样的js文件中.
+- 01/02/03.\*.js 都是之前写在 index.js 中的,一个文件就是一节的内容,一节完后就放在这样的 js 文件中.
 
 ### 20-7-3 学习所得
 
-1. 生成页面的顺序是:(main.js是放在内存中的)
-- 通过react渲染dom对象生成js
-- webpack将这些js打包成 main.js (可以实时打包)
-- 通过插件 html-webpack-plugin 把 main.js 写入index.html
-2. jsx语法
-- 就是符合 xml 规范的js语法(语法格式相对html严谨很多)
-- 安装 babel 插件跟配置 .babelrc 文件才能使用jsx语法
+1. 生成页面的顺序是:(main.js 是放在内存中的)
+
+- 通过 react 渲染 dom 对象生成 js
+- webpack 将这些 js 打包成 main.js (可以实时打包)
+- 通过插件 html-webpack-plugin 把 main.js 写入 index.html
+
+2. jsx 语法
+
+- 就是符合 xml 规范的 js 语法(语法格式相对 html 严谨很多)
+- 安装 babel 插件跟配置 .babelrc 文件才能使用 jsx 语法
+
+### 20-9-16 学习所得
+
+- 在 wewpack.config.js 中配置:(导入这些后缀名的文件就可以省略)
+
+```js
+resolve: {
+  extensions: ['.js', '.jsx', '.json'] // 表示这几个文件的后缀名,可以省略.
+}
+```
+- import Home from './view/home.jsx' // 这个引入的.jsx可以不写
