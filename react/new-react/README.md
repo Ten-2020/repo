@@ -1,7 +1,12 @@
+### 9-21
+- import 'antd/dist/antd.css',在index.js文件中这样引入才能成功,在app.less文件中引入less形式失败
+- 在ant-design的官网上看到的引入less样式是失败的,然后在网上按教程成功的引入less样式.
 ### 9-2
 
-
-
+- 可否照着运营平台支付中心来搭建个 React 的框架,兼备路由,全局变量,mock数据,登陆以及导航标签等
+- 心想着,能不能搞个一样的呢,先来个登陆,axios之类的.
+- 一则可以用router的beforeEach的方法返回,一则可以用不管它是哪个路径,先判断其有无token.
+- 就在beforeEach里判断,现在先把主页面写上.
 ### 8-31 JSX 语法规则
 
 - JSX 的基本语法规则：遇到 HTML 标签（以  <  开头），就用 HTML 规则解析
