@@ -1,12 +1,41 @@
-### 9-21
-- import 'antd/dist/antd.css',在index.js文件中这样引入才能成功,在app.less文件中引入less形式失败
-- 在ant-design的官网上看到的引入less样式是失败的,然后在网上按教程成功的引入less样式.
+### 9-23 在 vscode 上使用 node.js 来调试 js 文件
+- 因为在搞react的mock数据,因为网上说是要在craco.config.js中写before: require('./mock/index')
+- 但是我请求的时候,返回的数据不在data中,而是在response.request.response中,
+- 所以想看看mock中index.js是怎么写的,是如何返回数据的.
+- 但是在项目启动过程跟项目启动之后再到调到请求,都不能触发index.js文件写的debugger.
+- 是故只得单独调试这个index.js文件.
+- 调试的时候要配置 launch.json,如下:
+
+```json
+{
+  "type": "node",
+  "request": "launch",
+  "name": "启动程序",
+  "program": "${workspaceRoot}/mock/index.js", // 打开文件的位置
+  "sourceMaps": true,
+}
+```
+- request有两种模式:launch和attach,前者是直接打开文件(如:js文件),后者是附加到浏览器上打开(如:h5文件等)
+- 之前一直在尝试,但是都失败了,因为之前一直使用的是attach,报找不到require,因为这个在浏览器是无法识别的.
+### 9-22 -- 把登陆逻辑搞一搞
+
+- 重新搞了一遍 craco
+- yarn|yarn add antd|yarn add @craco/craco|yarn add mockjs|yarn add axios|
+- yarn add craco-less|(yarn add react-script/npm install --save react-scripts|后者有用)
+- craco.config.js 就相当于 webpack.config.js,用 craco 来代替 webpack---阿里的
+
+### 9-21 -- 已经把登陆页面弄出来了
+
+- import 'antd/dist/antd.css',在 index.js 文件中这样引入才能成功,在 app.less 文件中引入 less 形式失败
+- 在 ant-design 的官网上看到的引入 less 样式是失败的,然后在网上按教程成功的引入 less 样式.
+
 ### 9-2
 
-- 可否照着运营平台支付中心来搭建个 React 的框架,兼备路由,全局变量,mock数据,登陆以及导航标签等
-- 心想着,能不能搞个一样的呢,先来个登陆,axios之类的.
-- 一则可以用router的beforeEach的方法返回,一则可以用不管它是哪个路径,先判断其有无token.
-- 就在beforeEach里判断,现在先把主页面写上.
+- 可否照着运营平台支付中心来搭建个 React 的框架,兼备路由,全局变量,mock 数据,登陆以及导航标签等
+- 心想着,能不能搞个一样的呢,先来个登陆,axios 之类的.
+- 一则可以用 router 的 beforeEach 的方法返回,一则可以用不管它是哪个路径,先判断其有无 token.
+- 就在 beforeEach 里判断,现在先把主页面写上.
+
 ### 8-31 JSX 语法规则
 
 - JSX 的基本语法规则：遇到 HTML 标签（以  <  开头），就用 HTML 规则解析
@@ -19,7 +48,7 @@ ReactDOM.render(<div>{arr}</div>, document.getElementById('example'))
 ```
 
 - 组件类的第一个字母必须大写
-- 组件类只能包含一个顶层标签(这个跟在vue中,template中只能有一个标签一样)
+- 组件类只能包含一个顶层标签(这个跟在 vue 中,template 中只能有一个标签一样)
 - 组件的属性可以在组件类的 this.props 对象上获取
 - class 属性需要写在 className,for 属性要写成 htmlFor
 - this.props.children 属性表示组件子节点,值有三种可能:
@@ -45,6 +74,6 @@ ReactDOM.render(<div>{arr}</div>, document.getElementById('example'))
 
 ### 8-31 react 组件生命周期
 
-- mounting:  已插入真实 DOM
-- updating:  正在被重新渲染
-- unmounting:已移出真实DOM
+- mounting: 已插入真实 DOM
+- updating: 正在被重新渲染
+- unmounting:已移出真实 DOM
