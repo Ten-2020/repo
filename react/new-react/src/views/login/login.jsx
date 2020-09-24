@@ -1,32 +1,27 @@
 import React, { Component } from 'react'
-import { Input, Button, Row, Col } from 'antd';
+import { Input, Button, Row, Col, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './login.less';
-import axios from 'src/libs/axios.js'
+import { login } from 'src/api/login'
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
-  getData = () => {
-    axios.get('/api/user')
-      .then((res) => {
-        this.setState({
-          list: res.data
-        })
-        console.log(res)
-        console.log(res.data)
-        res.json({a:'2',b:'3'})
-        console.log(res)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  handleSubmit = () => {
+    let prarms = {
+      username: this.refs.user.state.value,
+      password: this.refs.pass.state.value,
+    }
+    login(prarms).then((res) => {
+      console.log('登陆', res)
+    }).catch(function (error) {
+      message.info('This is a error username or password');
+    })
   }
   render () {
     return (
-      // <div id="login-div" style={{ textAlign: 'center',width:'250px' }}>
       <div>
         <Row>
           <Col span={8} offset={10}>
@@ -34,11 +29,11 @@ export default class Login extends Component {
               <br />
               <br />
               <div>
-                <Input size="large" placeholder="user" prefix={<UserOutlined />} />
+                <Input ref='user' size="large" placeholder="user" prefix={<UserOutlined />} />
                 <br />
-                <Input size="large" placeholder="pass" prefix={<UserOutlined />} />
+                <Input ref='pass' size="large" placeholder="pass" prefix={<UserOutlined />} />
                 <br />
-                <Button size="large" type="default" block onClick={this.getData}>login</Button>
+                <Button size="large" type="default" block onClick={this.handleSubmit}>login</Button>
               </div>
             </div>
           </Col>
@@ -47,3 +42,26 @@ export default class Login extends Component {
     )
   }
 }
+  // import axios from 'src/libs/axios.js'
+    // axios.post('/api/login', {
+    //   username: this.refs.user.state.value,
+    //   password: this.refs.pass.state.value,
+    // }).then((res) => {
+    //   console.log('登陆', res)
+    //   this.setState({
+    //   })
+    // }).catch(function (error) {
+    //   message.info('This is a error username or password');
+    // })
+
+  // <div id="login-div" style={{ textAlign: 'center',width:'250px' }}>
+
+    // axios.get('/api/user')
+    //   .then((res) => {
+    //     this.setState({
+    //       // list: res.data
+    //     })
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })

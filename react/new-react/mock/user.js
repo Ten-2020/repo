@@ -1,11 +1,9 @@
-module.exports = {
-  // =====================
-  // The default GET request.
+module.exports = { // 把这里当做用户的数组,配有用户的基本设置还有权限角色等
   '/api/user': {
-    id: 1,
-    username: 'kenny',
-    sex: 6,
-    data: {
+    // id: 1,
+    // username: 'kenny',
+    // sex: 6,
+    data: { // 用这个data给response里的data赋值|真真是机灵的主意!
       id: 1,
       username: 'kenny',
       sex: 6,

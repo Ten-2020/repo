@@ -1,3 +1,17 @@
+### 9-24 login.js中出现req.body的值是undefined
+- 一来,发现虽然在这些js中写入debugger没有什么反应,但是打印语句会在控制台输出的
+- 二来,axios请求的时候,可以通过在axios.js中对res/req进行数据更改(在axios.js文件中具体书写)
+- 三来,数据请求到login.js时,req.body的值是undefined
+- 网上说是没有对req进行解析,需要引入body-parser(yarn add body-parser)
+- 虽然网上说的是node的,但是我觉得应该是一样的,使用的是同一个,实践之后发现如出一辙.
+- 实现:在mock/index.js中引入body-parser:const bodyParser = require('body-parser')
+- 接着在方法中:app.use(bodyParser())
+- 问题就得到了解决.perfect!
+- 附加:下午再试时,发现还是会出现undefined.
+- 经过多次调试之后发现username: this.refs.user.value 这个是取不到值的,早上应该是直接给的值.
+- 解决:username: this.refs.user.state.value
+
+
 ### 9-23 在 vscode 上使用 node.js 来调试 js 文件
 - 因为在搞react的mock数据,因为网上说是要在craco.config.js中写before: require('./mock/index')
 - 但是我请求的时候,返回的数据不在data中,而是在response.request.response中,
