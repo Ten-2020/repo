@@ -1,3 +1,4 @@
+import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -6,11 +7,11 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-
+import { Switch, Route } from "react-router-dom"
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-class SiderDemo extends React.Component {
+export default class SiderDemo extends React.Component {
   state = {
     collapsed: false,
   };
@@ -20,7 +21,7 @@ class SiderDemo extends React.Component {
     this.setState({ collapsed });
   };
 
-  render() {
+  render () {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
@@ -54,6 +55,20 @@ class SiderDemo extends React.Component {
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               Bill is a cat.
             </div>
+            {/* <Switch>
+              <Route path="/about">
+                <About></About>
+              </Route>
+              <Route path="/users">
+                <Users></Users>
+              </Route>
+              <Route path="/">
+                <Home></Home>
+              </Route>
+              <Route path="/Topics">
+                <Topics></Topics>
+              </Route>
+            </Switch> */}
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
@@ -61,5 +76,3 @@ class SiderDemo extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<SiderDemo />, mountNode);

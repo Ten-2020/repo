@@ -3,7 +3,7 @@ module.exports = {
   'POST /api/login': (req, res) => {
     const { password, username } = req.body
     let userItem = users[username]
-    console.log('用户', users, userItem, password, username)
+    // console.log('用户', users, userItem, password, username)
     if (userItem) {
       if (userItem.password === password) {
         return res.json({

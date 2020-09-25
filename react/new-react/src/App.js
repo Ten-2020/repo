@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { Component, Provider } from 'react'
 import './App.less';
-import Login from './views/login/login'
-export default function App () {
-  return (
-    // <div> 这是首页</div>
-    <Login></Login>
-  )
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route} from "react-router-dom";
+import router from "src/libs/router"
+import history from './libs/history';
+
+export default class App extends Component {
+  render () {
+    return (
+      <Router history={history}>
+        {/* <nav className="nav">
+          <ul>
+            <li>
+              <Link to="/">登陆</Link>
+            </li>
+            <li>
+              <Link to="/main">首页</Link>
+            </li>
+          </ul>
+        </nav> */}
+        {
+          router.map((router, index) => {
+            if (router.exact) {
+              return <Route exact key={index} path={router.path}
+                render={
+                  props => (
+                    <router.component {...props} routes={router.routes} />
+                  )
+                }
+              />
+            } else {
+              return <Route key={index} path={router.path}
+                render={
+                  props => (
+                    <router.component {...props} routes={router.routes} />
+                  )
+                }
+              />
+            }
+          })
+        }
+      </Router>
+    )
+  }
 }
-// 反正每次进来都要登陆,那我就直接给登陆页面给它.

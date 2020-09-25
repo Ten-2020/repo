@@ -1,3 +1,4 @@
+const path = require('path')
 const CracoLessPlugin = require('craco-less');
 // 这里就相当于webpack.config.js,用craco来代替webpack
 module.exports = {
@@ -22,4 +23,10 @@ module.exports = {
       },
     },
   ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'], // 表示这几个文件的后缀名,可以省略.
+    alias: {
+      '@': path.join(__dirname, './src') // 这样,@就表示项目根目录中src的这一层路径
+    }
+  },
 };

@@ -3,6 +3,7 @@ import { Input, Button, Row, Col, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import './login.less';
 import { login } from 'src/api/login'
+import history from 'src/libs/history';
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class Login extends Component {
       password: this.refs.pass.state.value,
     }
     login(prarms).then((res) => {
-      console.log('登陆', res)
+      history.push('/main/steak')
     }).catch(function (error) {
       message.info('This is a error username or password');
     })
@@ -29,9 +30,9 @@ export default class Login extends Component {
               <br />
               <br />
               <div>
-                <Input ref='user' size="large" placeholder="user" prefix={<UserOutlined />} />
+                <Input defaultValue="weiwei" ref='user' size="large" placeholder="user" prefix={<UserOutlined />} />
                 <br />
-                <Input ref='pass' size="large" placeholder="pass" prefix={<UserOutlined />} />
+                <Input defaultValue="weiwei" ref='pass' size="large" placeholder="pass" prefix={<UserOutlined />} />
                 <br />
                 <Button size="large" type="default" block onClick={this.handleSubmit}>login</Button>
               </div>
