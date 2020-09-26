@@ -1,28 +1,44 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd'
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { Switch, Route } from "react-router-dom"
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+} from '@ant-design/icons'
+import { Route, Router } from 'react-router-dom'
+// import router from "src/libs/router"
+import history from 'src/libs/history'
+
+const { Header, Content, Footer, Sider } = Layout
+const { SubMenu } = Menu
 
 export default class SiderDemo extends React.Component {
-  state = {
-    collapsed: false,
-  };
+  constructor(props) {
+    super()
+    console.log('属性', props)
+    let { location, routes } = props
+    let route = routes.find((f) => f.path === location.pathname)
+    // let com = route.component
+    this.state = {
+      collapsed: false,
+      route: route,
+    }
+  }
+  // state = {
+  //   collapsed: false,
+  // }
 
-  onCollapse = collapsed => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
+  onCollapse = (collapsed) => {
+    console.log(collapsed)
+    this.setState({ collapsed })
+  }
 
-  render () {
+  render() {
     return (
+      // <Router routes={this.state.route} history={history}/>
+
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
@@ -53,26 +69,13 @@ export default class SiderDemo extends React.Component {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              Bill is a cat.
+              {/* Bill is a cat. */}
+              <Route routes={this.state.route} component={this.state.route.component} />
             </div>
-            {/* <Switch>
-              <Route path="/about">
-                <About></About>
-              </Route>
-              <Route path="/users">
-                <Users></Users>
-              </Route>
-              <Route path="/">
-                <Home></Home>
-              </Route>
-              <Route path="/Topics">
-                <Topics></Topics>
-              </Route>
-            </Switch> */}
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
       </Layout>
-    );
+    )
   }
 }

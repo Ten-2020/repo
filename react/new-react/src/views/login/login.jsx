@@ -7,15 +7,15 @@ import history from 'src/libs/history';
 
 export default class Login extends Component {
   constructor(props) {
-    super(props)
+    super()
     this.state = {}
   }
   handleSubmit = () => {
-    let prarms = {
+    let params = {
       username: this.refs.user.state.value,
       password: this.refs.pass.state.value,
     }
-    login(prarms).then((res) => {
+    login(params).then((res) => {
       history.push('/main/steak')
     }).catch(function (error) {
       message.info('This is a error username or password');

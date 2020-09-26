@@ -1,4 +1,4 @@
-import React, { Component, Provider } from 'react'
+import React, { Component } from 'react'
 import './App.less';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Router, Route} from "react-router-dom";
