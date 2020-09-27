@@ -7,9 +7,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Route, Router } from 'react-router-dom'
-// import router from "src/libs/router"
-import history from 'src/libs/history'
+import { Route } from 'react-router-dom'
 
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
@@ -17,10 +15,9 @@ const { SubMenu } = Menu
 export default class SiderDemo extends React.Component {
   constructor(props) {
     super()
-    console.log('属性', props)
+    // console.log('属性', props)
     let { location, routes } = props
     let route = routes.find((f) => f.path === location.pathname)
-    // let com = route.component
     this.state = {
       collapsed: false,
       route: route,
@@ -37,8 +34,6 @@ export default class SiderDemo extends React.Component {
 
   render() {
     return (
-      // <Router routes={this.state.route} history={history}/>
-
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
