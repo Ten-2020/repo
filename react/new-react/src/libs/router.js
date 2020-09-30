@@ -11,16 +11,19 @@ const routes = [
     exact: true
   },
   {
-    path: "/main",
+    path: "/beef",
     component: main,
+    name:'牛肉',
     routes: [
       {
-        path: "/main/steak",
-        component: steak
+        path: "/beef/steak",
+        component: steak,
+        name:'牛腩',
       },
       {
-        path: "/main/sirloin",
-        component: sirloin
+        path: "/beef/sirloin",
+        component: sirloin,
+        name:'牛排',
       }
     ]
   },

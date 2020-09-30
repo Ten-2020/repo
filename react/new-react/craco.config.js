@@ -25,9 +25,6 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.json'], // 表示这几个文件的后缀名,可以省略.
-    // alias: {
-    //   '@': path.join(__dirname, 'src') // 这样,@就表示项目根目录中src的这一层路径
-    // }
   },
   webpack: {
     alias: { // 用这个来代替上面那个
