@@ -1,12 +1,6 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd'
-import {
-  DesktopOutlined,
-  // PieChartOutlined,
-  // FileOutlined,
-  // TeamOutlined,
-  // UserOutlined,
-} from '@ant-design/icons'
+// import { DesktopOutlined } from '@ant-design/icons'
 import { Route } from 'react-router-dom'
 import routers from '@/libs/router'
 import history from 'src/libs/history'
@@ -22,7 +16,6 @@ export default class SiderDemo extends React.Component {
     this.state = {
       collapsed: false,
       route: route, // 这个是当前显示的组件
-      routers: routers, // 这个是router中的所有的跳转路由
     }
   }
   // state = {
@@ -72,8 +65,8 @@ export default class SiderDemo extends React.Component {
   render () {
     let menus = this.mapRoute(routers).filter((i) => i)
     return (
-      <Layout style={{ minHeight: '100vh'}}>
-        <Header style={{ padding: 0, height: '50px', background: '#fff',textAlign:'center' }}>
+      <Layout style={{ minHeight: '100vh' }}>
+        <Header style={{ padding: 0, height: '50px', background: '#fff', textAlign: 'center' }}>
           <h3>欢迎来到新世界饭店</h3>
         </Header>
         <Layout>
@@ -86,7 +79,7 @@ export default class SiderDemo extends React.Component {
           <Content className="site-layout">
             <Content style={{ margin: '0 16px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>User</Breadcrumb.Item>
+                <Breadcrumb.Item>owner</Breadcrumb.Item>
                 <Breadcrumb.Item>weiwei</Breadcrumb.Item>
               </Breadcrumb>
               <div className="site-layout-background" style={{ padding: 24, minHeight: 460 }}>

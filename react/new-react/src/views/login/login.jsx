@@ -16,7 +16,7 @@ export default class Login extends Component {
       password: this.refs.pass.state.value,
     }
     login(params).then((res) => {
-      history.push('/beef/steak')
+      history.push('/drypot/crab')
     }).catch(function (error) {
       message.info('This is a error username or password');
     })
