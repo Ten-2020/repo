@@ -1,6 +1,5 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd'
-// import { DesktopOutlined } from '@ant-design/icons'
 import { Route } from 'react-router-dom'
 import routers from '@/libs/router'
 import history from 'src/libs/history'
@@ -15,26 +14,22 @@ export default class SiderDemo extends React.Component {
     let route = routes.find((f) => f.path === location.pathname)
     this.state = {
       collapsed: false,
-      route: route, // 这个是当前显示的组件
+      route: route
     }
   }
-  // state = {
-  //   collapsed: false,
-  // }
   onCollapse = (collapsed) => {
     this.setState({ collapsed })
   }
   mapRoute (item) {
     if (item instanceof Array) {
       let re = item.map((it) => {
-        return this.mapRoute(it) // 第一次循环就返回了
+        return this.mapRoute(it)
       })
       if (re) return re
     } else {
       if (!item.exact) {
         if (item.routes) {
           return (
-            // <SubMenu key={item.path} icon={<DesktopOutlined />} title={item.name}>
             <SubMenu key={item.path} icon={<item.icon />} title={item.name}>
               {item.routes.map((i) => {
                 return this.mapRoute(i)
@@ -43,8 +38,6 @@ export default class SiderDemo extends React.Component {
           )
         } else {
           return (
-            // <Menu.Item key={item.path} onClick={this.routePush(item.path)}> // 这个不能传参
-            // onClick={this.handleClick.bind(this, 11, 22)} // 这个也可以传参
             <Menu.Item key={item.path} onClick={() => this.routePush(item.path)}>
               {item.name}
             </Menu.Item>
@@ -55,10 +48,9 @@ export default class SiderDemo extends React.Component {
   }
   routePush = (path) => {
     history.push(`..${path}`)
-    // 用这个在登陆页面跳转过来是可以直接渲染的,在这里只是改了地址,可能是已经渲染过的缘故!
     let { routes } = this.props
     let route = routes.find((f) => f.path === path)
-    this.setState({ // 这个能够让主页面中的组件得到改变.
+    this.setState({
       route: route
     })
   }

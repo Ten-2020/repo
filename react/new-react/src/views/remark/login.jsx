@@ -43,3 +43,26 @@ export default class Login extends Component {
     )
   }
 }
+  // import axios from 'src/libs/axios.js'
+    // axios.post('/api/login', {
+    //   username: this.refs.user.state.value,
+    //   password: this.refs.pass.state.value,
+    // }).then((res) => {
+    //   console.log('登陆', res)
+    //   this.setState({
+    //   })
+    // }).catch(function (error) {
+    //   message.info('This is a error username or password');
+    // })
+
+  // <div id="login-div" style={{ textAlign: 'center',width:'250px' }}>
+
+    // axios.get('/api/user')
+    //   .then((res) => {
+    //     this.setState({
+    //       // list: res.data
+    //     })
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
