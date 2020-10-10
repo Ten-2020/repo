@@ -67,7 +67,7 @@ const routes = [
         name: '四川火锅',
       },
     ]
-  },
+  }
 
 ]
 
