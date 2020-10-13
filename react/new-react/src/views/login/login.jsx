@@ -23,7 +23,8 @@ export default class Login extends Component {
   }
   render () {
     return (
-      <div>
+      // 649px 下面这个100vh就代表着屏幕的高度,之前写的那些不知道能不能用.
+      <div style={{ height: '100vh', backgroundImage: "url(" + require("@/assets/images/湖人总冠军.jpg") + ")" }}>
         <Row>
           <Col span={8} offset={10}>
             <div className="login" >

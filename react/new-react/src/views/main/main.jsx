@@ -3,7 +3,7 @@ import { Layout, Menu, Breadcrumb } from 'antd'
 import { Route } from 'react-router-dom'
 import routers from '@/libs/router'
 import history from 'src/libs/history'
-
+import Head from '@/views/main/header'
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
 
@@ -64,9 +64,10 @@ export default class SiderDemo extends React.Component {
     let menus = this.mapRoute(routers).filter((i) => i)
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Header style={{ padding: 0, height: '50px', background: '#fff', textAlign: 'center' }}>
-          <h3>欢迎来到新世界饭店</h3>
-        </Header>
+        {/* <Header style={{ padding: 0, height: '40px', background: '#fff'}}> */}
+          {/* <h3>欢迎来到新世界饭店</h3> , textAlign: 'center'  */}
+          <Head></Head>
+        {/* </Header> */}
         <Layout>
           <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} theme='light'>
             <div className="logo" />
