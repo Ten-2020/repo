@@ -64,10 +64,7 @@ export default class SiderDemo extends React.Component {
     let menus = this.mapRoute(routers).filter((i) => i)
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        {/* <Header style={{ padding: 0, height: '40px', background: '#fff'}}> */}
-          {/* <h3>欢迎来到新世界饭店</h3> , textAlign: 'center'  */}
           <Head></Head>
-        {/* </Header> */}
         <Layout>
           <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} theme='light'>
             <div className="logo" />
@@ -78,7 +75,7 @@ export default class SiderDemo extends React.Component {
           </Sider>
           <Content className="site-layout">
             <Content style={{ margin: '0 16px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb style={{ margin: '6px 0' }}>
                 <Breadcrumb.Item>owner</Breadcrumb.Item>
                 <Breadcrumb.Item>weiwei</Breadcrumb.Item>
               </Breadcrumb>

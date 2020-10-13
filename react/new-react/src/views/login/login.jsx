@@ -33,7 +33,9 @@ export default class Login extends Component {
               <div>
                 <Input defaultValue="weiwei" ref='user' size="large" placeholder="user" prefix={<UserOutlined />} />
                 <br />
-                <Input defaultValue="weiwei" ref='pass' size="large" placeholder="pass" prefix={<UserOutlined />} />
+                {/* <Input defaultValue="weiwei" ref='pass' size="large" placeholder="pass" prefix={<UserOutlined />} />
+                <br /> */}
+                <Input.Password size="large" ref='pass' defaultValue="weiwei" prefix={<UserOutlined />} />
                 <br />
                 <Button size="large" type="default" block onClick={this.handleSubmit}>login</Button>
               </div>
