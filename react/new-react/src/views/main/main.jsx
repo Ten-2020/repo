@@ -1,9 +1,12 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd'
+import { Input, Button, Row, Col, message } from 'antd'
 import { Route } from 'react-router-dom'
 import routers from '@/libs/router'
 import history from 'src/libs/history'
-import Head from '@/views/main/header'
+import Head from '@/views/main/com/header'
+import './main.less'
+
 const { Header, Content, Footer, Sider } = Layout
 const { SubMenu } = Menu
 

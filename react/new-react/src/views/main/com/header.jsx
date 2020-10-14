@@ -16,7 +16,8 @@ export default class Head extends Component {
     history.push('/')
   }
   homeClick = () => {
-    history.push('/drypot/crab')
+    // history.push('/song/hanfang')
+    history.push(constant.mainUrl)
   }
   render () {
     return (

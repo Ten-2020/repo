@@ -1,4 +1,4 @@
-const users = require('../pri/user.js')
+const users = require('../pri/user/user.js')
 module.exports = {
   'POST /api/login': (req, res) => {
     const { password, username } = req.body

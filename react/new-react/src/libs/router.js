@@ -1,11 +1,10 @@
 import login from 'src/views/login/login'
 import main from 'src/views/main/main.jsx'
-import crab from 'src/views/component/drypot/crab/crab'
-import shrimp from '@/views/component/drypot/shrimp/shrimp'
-import bullfrog from '@/views/component/drypot/bullfrog/bullfrog'
-import guangdong from '@/views/component/hotpot/guangdong/guangdong.jsx'
-import chongqing from '@/views/component/hotpot/chongqing/chongqing.jsx'
-import sichuan from '@/views/component/hotpot/sichuan/sichuan.jsx'
+import early from 'src/views/component/tang/early/early'
+import middle from '@/views/component/tang/middle/middle'
+import latter from '@/views/component/tang/latter/latter'
+import wanyue from '@/views/component/song/wanyue/wanyue'
+import hanfang from '@/views/component/song/hanfang/hanfang'
 import {
   DesktopOutlined,
   // PieChartOutlined,
@@ -23,49 +22,44 @@ const routes = [
     exact: true
   },
   {
-    path: "/drypot",
+    path: "/tang",
     component: main,
-    name: '干锅',
+    name: '唐诗',
     icon: HomeOutlined,
     routes: [
       {
-        path: "/drypot/crab",
-        component: crab,
-        name: '干锅蟹煲',
+        path: "/tang/early",
+        component: early,
+        name: '盛唐',
       },
       {
-        path: "/drypot/shrimp",
-        component: shrimp,
-        name: '干锅虾煲',
+        path: "/tang/middle",
+        component: middle,
+        name: '中唐',
       },
       {
-        path: "/drypot/bullfrog",
-        component: bullfrog,
-        name: '干锅牛蛙',
+        path: "/tang/latter",
+        component: latter,
+        name: '晚唐',
       },
     ]
   },
   {
-    path: "/hotpot",
+    path: "/song",
     component: main,
-    name: '火锅',
+    name: '宋词',
     icon: DesktopOutlined,
     routes: [
       {
-        path: "/hotpot/guangdong",
-        component: guangdong,
-        name: '广东火锅',
+        path: "/song/wanyue",
+        component: wanyue,
+        name: '婉约派',
       },
       {
-        path: "/hotpot/chongqing",
-        component: chongqing,
-        name: '重庆火锅',
-      },
-      {
-        path: "/hotpot/sichuan",
-        component: sichuan,
-        name: '四川火锅',
-      },
+        path: "/song/hanfang",
+        component: hanfang,
+        name: '豪放派',
+      }
     ]
   }
 

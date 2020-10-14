@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.less';
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Router, Route} from "react-router-dom";
+import { Router, Route} from "react-router-dom"
 import router from "src/libs/router"
-import history from './libs/history';
-
+import history from './libs/history'
+import constant from '@/views/main/whole/constants'
 export default class App extends Component {
   render () {
     return (

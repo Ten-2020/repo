@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Input, Button, Row, Col, message } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Input, Button, Row, Col, message } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 import './login.less';
 import { login } from 'src/api/login'
-import history from 'src/libs/history';
+import history from 'src/libs/history'
+import constant from '@/views/main/whole/constants' // 这个还要在这里引用,具体缘由不清楚!   
 
 export default class Login extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class Login extends Component {
       password: this.refs.pass.state.value,
     }
     login(params).then((res) => {
-      history.push('/drypot/crab')
+      history.push(constant.mainUrl)
     }).catch(function (error) {
       message.info('This is a error username or password');
     })
