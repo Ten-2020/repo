@@ -23,7 +23,11 @@ export default class Head extends Component {
     return (
       <div style={{ padding: 0, height: '33px', borderBottom: '1px solid red' }}>
         <Row justify="space-between" align="bottom">
-          <Col order={1} flex="200px" ></Col>
+          <Col order={1} flex="200px" >
+            <div style={{ textAlign: 'left', paddingTop: '3px',paddingLeft:'20px' }}>
+              <h3>设计者：Ten</h3>
+            </div>
+          </Col>
           <Col order={3} flex="200px">
             <div className="icons-list" align="right">
               <HomeTwoTone onClick={this.homeClick} style={{ paddingRight: '10px', fontSize: '20px', cursor: 'pointer' }} twoToneColor="#eb2f96" />

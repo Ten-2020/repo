@@ -86,7 +86,7 @@ export default class SiderDemo extends React.Component {
                 <Route routes={this.state.route} component={this.state.route.component} />
               </div>
             </Content>
-            <Footer style={{ textAlign: 'right' }}>Created By GT</Footer>
+            {/* <Footer style={{ textAlign: 'right' }}>Created By GT</Footer> */}
           </Content>
         </Layout>
       </Layout>

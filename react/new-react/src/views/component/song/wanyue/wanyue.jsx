@@ -4,7 +4,7 @@
  * @Date: 2020-09-09 10:19:27
  */
 import React, { Component } from 'react'
-import { Form, Input, Button, Card, Row, Col, Table,message } from 'antd'
+import { Form, Input, Button, Card, Row, Col, Table, message } from 'antd'
 import './wanyue.less'
 import { search } from 'src/api/wanyue'
 
@@ -15,36 +15,28 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 6, span: 16 },
 }
-const dataSource = [
-  {
-    key: '1',
-    name: '胡彦斌',
-    age: 32,
-    address: '西湖区湖底公园1号',
-  },
-  {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号',
-  },
-]
 
 const columns = [
   {
     title: '词牌名',
     dataIndex: 'name',
     key: 'name',
+    width: 100,
+    align: 'center'
   },
   {
     title: '朝代',
     dataIndex: 'dynasty',
     key: 'dynasty',
+    width: 70,
+    align: 'center'
   },
   {
     title: '作者',
     dataIndex: 'author',
     key: 'author',
+    width: 70,
+    align: 'center'
   },
   {
     title: '内容',
@@ -56,6 +48,7 @@ const columns = [
     key: 'operation',
     fixed: 'right',
     width: 150,
+    align: 'center',
     render: () => (
       <>
         <Button htmlType="button" size="small" type="primary">修改</Button>
@@ -72,16 +65,36 @@ export default class Wanyue extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: ''
+      list: [],
+      author: '',
+      name: ''
     }
+    this.search(params) // 这里要写上this,要不然就是调用引入的search方法.
+  }
+  search = (params) => {
     search(params).then((res) => {
-      this.setState({ list: res.data })
+      // console.log('res', res)
+      this.setState({ list: res.data.data })
     }).catch(function (error) {
+      console.log('获取失败', error)
       message.error('获取失败', error)
     })
   }
-  onFinish = values => {
+  handleSubmit = () => {
+    let params = {
+      author: this.state.author,
+      name: this.state.name
+    }
+    this.search(params)
+  }
+  onFinish = values => { // 这个不知道是干嘛的.
     console.log(values);
+  }
+  handleChange = (event, prop) => {
+    if (event && event.target && event.target.value) {
+      let value = event.target.value;
+      this.setState({ [prop]: value })
+    }
   }
   render () {
     return (
@@ -91,19 +104,19 @@ export default class Wanyue extends Component {
             <Row>
               <Col span={5}>
                 <Form.Item name="author" label="作者" rules={[{ required: true }]}>
-                  <Input />
+                  <Input ref='author' onChange={event => this.handleChange(event, 'author')} />
                 </Form.Item>
               </Col>
               <Col span={5}>
                 <Form.Item name="name" label="词名" rules={[{ required: true }]}>
-                  <Input />
+                <Input ref='name' onChange={event => this.handleChange(event, 'name')} />
                 </Form.Item>
               </Col>
             </Row>
             <Row>
               <Col span={5}>
                 <Form.Item {...tailLayout}>
-                  <Button htmlType="button" size="small" type="default">
+                  <Button onClick={this.handleSubmit} htmlType="button" size="small" type="default" >
                     查询
                   </Button>
                   <Button htmlType="button" size="small" type="default" style={{ marginLeft: '30px' }}>
