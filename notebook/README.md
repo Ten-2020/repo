@@ -1,5 +1,14 @@
 # 突然发现,还是把新发现的写在上面好点
 
+### 10-16 在项目 new-react 中实现正则
+
+- 校验正则有两个方法:RegExp.test(str)和 str.match(str/regexp)
+- let reg = '[^&]+&柳永'
+- 根据第二种方法:str.match(`/${reg}/`),返回 NULL
+- 根据第一种方法:要动态生成正则表达式,开始写的是`/${reg}/`,这个会生成字符串,返回 false
+- 解决:new RegExp(reg).test(k),返回 true
+- 这个new RegExp会自动为字符串加上 / /,使其成为正则表达式.
+
 ### 9-9 通过测试发现的一些问题(9-10 更新)
 
 1. 滚动条被遮住问题:(问题在 9-18 号得到解决)
@@ -42,7 +51,7 @@
 
 - 在我司内部账户编辑时,想让管理页面的列表也跟随着刷新数据,所以我就在 vuex 中设置一个全局变量
 - 在编辑时,改变这个全局变量的值,接着在管理页面监听这个值,然后刷新列表,也就是再查一遍数据.
-- 可通过在 main.js 中引用: Vue.prototype.$bus = new Vue() // event Bus 用于无关系组件间的通信
+- 可通过在 main.js 中引用: Vue.prototype.\$bus = new Vue() // event Bus 用于无关系组件间的通信
 - 至于上面为什么这个引用,我就不清楚了.待运用多时能明白此间奥妙.
 - this.$bus.$emit('isCalled')|如果在 js 文件中,就先引进 Vue,再通过 Vue.\$bus 来使用
 - this.$bus.$on('isCalled', ()=>{

@@ -1,26 +1,48 @@
-### 10-14 想着写一个全局的message
+### 10-15 获取 input 的值
+
+- <Input ref='user' /> 这样通过：this.refs.user.state.value 就能获取到值
+
+```html
+<Form.Item name="author" label="作者">
+  <Input ref='author' onChange={event => this.handleChange(event, 'author')} />
+</Form.Item>
+```
+```js
+handleChange = (event, prop) => {
+  if (event && event.target && event.target.value) {
+    let value = event.target.value
+    this.setState({ [prop]: value })
+  }
+}
+```
+- 要通过监听来获取到值.具体缘由不清楚.
+
+### 10-14 想着写一个全局的 message
+
 - 能够在每一个文件都能直接调用,而不用每次都要导入
 - 但是网上的教程都挺复杂的
-### 9-24 login.js中出现req.body的值是undefined
-- 一来,发现虽然在这些js中写入debugger没有什么反应,但是打印语句会在控制台输出的
-- 二来,axios请求的时候,可以通过在axios.js中对res/req进行数据更改(在axios.js文件中具体书写)
-- 三来,数据请求到login.js时,req.body的值是undefined
-- 网上说是没有对req进行解析,需要引入body-parser(yarn add body-parser)
-- 虽然网上说的是node的,但是我觉得应该是一样的,使用的是同一个,实践之后发现如出一辙.
-- 实现:在mock/index.js中引入body-parser:const bodyParser = require('body-parser')
+
+### 9-24 login.js 中出现 req.body 的值是 undefined
+
+- 一来,发现虽然在这些 js 中写入 debugger 没有什么反应,但是打印语句会在控制台输出的
+- 二来,axios 请求的时候,可以通过在 axios.js 中对 res/req 进行数据更改(在 axios.js 文件中具体书写)
+- 三来,数据请求到 login.js 时,req.body 的值是 undefined
+- 网上说是没有对 req 进行解析,需要引入 body-parser(yarn add body-parser)
+- 虽然网上说的是 node 的,但是我觉得应该是一样的,使用的是同一个,实践之后发现如出一辙.
+- 实现:在 mock/index.js 中引入 body-parser:const bodyParser = require('body-parser')
 - 接着在方法中:app.use(bodyParser())
 - 问题就得到了解决.perfect!
-- 附加:下午再试时,发现还是会出现undefined.
-- 经过多次调试之后发现username: this.refs.user.value 这个是取不到值的,早上应该是直接给的值.
+- 附加:下午再试时,发现还是会出现 undefined.
+- 经过多次调试之后发现 username: this.refs.user.value 这个是取不到值的,早上应该是直接给的值.
 - 解决:username: this.refs.user.state.value
 
-
 ### 9-23 在 vscode 上使用 node.js 来调试 js 文件
-- 因为在搞react的mock数据,因为网上说是要在craco.config.js中写before: require('./mock/index')
-- 但是我请求的时候,返回的数据不在data中,而是在response.request.response中,
-- 所以想看看mock中index.js是怎么写的,是如何返回数据的.
-- 但是在项目启动过程跟项目启动之后再到调到请求,都不能触发index.js文件写的debugger.
-- 是故只得单独调试这个index.js文件.
+
+- 因为在搞 react 的 mock 数据,因为网上说是要在 craco.config.js 中写 before: require('./mock/index')
+- 但是我请求的时候,返回的数据不在 data 中,而是在 response.request.response 中,
+- 所以想看看 mock 中 index.js 是怎么写的,是如何返回数据的.
+- 但是在项目启动过程跟项目启动之后再到调到请求,都不能触发 index.js 文件写的 debugger.
+- 是故只得单独调试这个 index.js 文件.
 - 调试的时候要配置 launch.json,如下:
 
 ```json
@@ -29,11 +51,13 @@
   "request": "launch",
   "name": "启动程序",
   "program": "${workspaceRoot}/mock/index.js", // 打开文件的位置
-  "sourceMaps": true,
+  "sourceMaps": true
 }
 ```
-- request有两种模式:launch和attach,前者是直接打开文件(如:js文件),后者是附加到浏览器上打开(如:h5文件等)
-- 之前一直在尝试,但是都失败了,因为之前一直使用的是attach,报找不到require,因为这个在浏览器是无法识别的.
+
+- request 有两种模式:launch 和 attach,前者是直接打开文件(如:js 文件),后者是附加到浏览器上打开(如:h5 文件等)
+- 之前一直在尝试,但是都失败了,因为之前一直使用的是 attach,报找不到 require,因为这个在浏览器是无法识别的.
+
 ### 9-22 -- 把登陆逻辑搞一搞
 
 - 重新搞了一遍 craco

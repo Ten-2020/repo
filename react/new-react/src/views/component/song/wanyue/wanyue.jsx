@@ -58,8 +58,8 @@ const columns = [
   },
 ]
 let params = {
-  author: '',
   name: '',
+  author: '',
 }
 export default class Wanyue extends Component {
   constructor(props) {
@@ -71,7 +71,7 @@ export default class Wanyue extends Component {
     }
     this.search(params) // 这里要写上this,要不然就是调用引入的search方法.
   }
-  search = (params) => {
+  search = (params) => { // 这个参数是有顺序要求的
     search(params).then((res) => {
       // console.log('res', res)
       this.setState({ list: res.data.data })
@@ -82,8 +82,8 @@ export default class Wanyue extends Component {
   }
   handleSubmit = () => {
     let params = {
-      author: this.state.author,
-      name: this.state.name
+      name: this.state.name,
+      author: this.state.author
     }
     this.search(params)
   }
@@ -109,7 +109,7 @@ export default class Wanyue extends Component {
               </Col>
               <Col span={5}>
                 <Form.Item name="name" label="词名" rules={[{ required: true }]}>
-                <Input ref='name' onChange={event => this.handleChange(event, 'name')} />
+                  <Input ref='name' onChange={event => this.handleChange(event, 'name')} />
                 </Form.Item>
               </Col>
             </Row>
