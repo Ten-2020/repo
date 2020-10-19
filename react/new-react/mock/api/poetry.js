@@ -1,29 +1,17 @@
-const songs = require('../pri/song/song')
-
-function mixReg (vals) { // 形成形如：*&*&* 的key
-  let reg = ''
-  let general = ''
-  for (let v of vals) {
-    let reg_ = v ? v : '[^&]+'
-    reg = reg + reg_ + '&'
-    general += '[^&]+&'
-  }
-  if (reg === general) return 1 // 表示参数都为空
-  if (reg.endsWith('&')) {
-    reg = reg.slice(0, reg.length - 1)
-  }
-  return reg
+// const songs = require('../pri/song/song')
+const utils = require('./util/handle')
+let songs = ''
+if (!songs) {
+  songs = utils.readJson('./mock/pri/song/song.json')
 }
+
 module.exports = {
   'POST /wanyue/search': (req, res) => {
     let vals = Object.values(req.body)
-    let reg = mixReg(vals)
+    let reg = utils.mixReg(vals)
+    console.log('读取到的数据', songs)
     if (reg === 1) {
-      return res.json({
-        status: 'ok',
-        code: 0,
-        data: Object.values(songs)
-      })
+      return res.json(Object.values(songs))
     } else {
       let keys = Object.keys(songs)
       let list = []
@@ -32,11 +20,10 @@ module.exports = {
           list.push(songs[k])
         }
       }
-      return res.json({
-        status: 'ok',
-        code: 0,
-        data: list
-      })
+      return res.json(list)
     }
+  },
+  'POST /wanyue/edit': (req, res) => {
+    return res.json()
   }
 }

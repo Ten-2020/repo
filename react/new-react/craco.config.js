@@ -29,7 +29,8 @@ module.exports = {
   webpack: {
     alias: { // 用这个来代替上面那个
       "@": path.resolve("src"),
-      "@utils": path.resolve("src/utils"),
+      // "@utils": path.resolve("src/utils"),
+      "@utils": path.resolve("src/libs/utils"),
     }
   },
 };
