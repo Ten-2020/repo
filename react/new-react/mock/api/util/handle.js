@@ -1,6 +1,9 @@
 const fs = require('fs')
 module.exports = {
-  mixReg: (vals) => { // 形成形如：*&*&* 的key
+  // 形成形如：[^&]+&[^&]+&[^&]+ 的key
+  // 以 & 为间隔,一来它不是关键字,本来想用的 | 这个,但是它是关键字
+  // [^&]+ 表示 除&个的所有字符.
+  mixReg: (vals) => {
     let reg = ''
     let general = ''
     for (let v of vals) {
@@ -14,42 +17,22 @@ module.exports = {
     }
     return reg
   },
-  readJson: (fileUrl) => {
-    let dataJson = ''
-    fs.readFile(fileUrl, function (err, data) {
+  writeJson: (res, state, str) => {
+    let { fileUrl } = state
+    let json = JSON.stringify(str)
+    console.log('要写入的数据', json)
+    fs.writeFile(fileUrl, json, function (err) {
       if (err) {
-        return console.error(err);
+        console.error(err);
+        res.status(403).json({
+          status: 'error',
+          code: 403
+        })
+      } else {
+        console.log('----------写入成功-------');
+        state.songs = str
+        return res.json()
       }
-      let dataStr = data.toString()
-      let dataJson = JSON.parse(dataStr)
-      // console.log('读取到的数据', dataJson)
-      // var person = data.toString();//将二进制的数据转换为字符串
-      // person = JSON.parse(person);//将字符串转换为json对象
-      // person.data.push(params);//将传来的对象push进数组对象中
-      // person.total = person.data.length;//定义一下总条数，为以后的分页打基础
-      // console.log(person.data);
-    })
-    console.log('读取到的数据', dataJson)
-    return dataJson
-  },
-  writeJson: (params) => {
-    //现将json文件读出来
-    fs.readFile('./mock/person.json', function (err, data) {
-      if (err) {
-        return console.error(err);
-      }
-      var person = data.toString();//将二进制的数据转换为字符串
-      person = JSON.parse(person);//将字符串转换为json对象
-      person.data.push(params);//将传来的对象push进数组对象中
-      person.total = person.data.length;//定义一下总条数，为以后的分页打基础
-      console.log(person.data);
-      var str = JSON.stringify(person);//因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
-      fs.writeFile('./mock/person.json', str, function (err) {
-        if (err) {
-          console.error(err);
-        }
-        console.log('----------新增成功-------------');
-      })
     })
   }
 }

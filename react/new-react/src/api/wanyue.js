@@ -5,3 +5,6 @@ export const search = (params) => {
 export const edit = (params) => {
   return axios.post('/wanyue/edit', params)
 }
+export const fresh = (params) => {
+  return axios.post('/wanyue/fresh', params)
+}
