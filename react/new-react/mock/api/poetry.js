@@ -18,8 +18,8 @@ const state = {
 }
 
 if (!state.songs) {
-  let datas = fs.readFileSync(state.fileUrl) // 相对项目的路径
-  let dataStr = datas.toString() // 将二进制的数据转换为字符串
+  let data = fs.readFileSync(state.fileUrl) // 相对项目的路径
+  let dataStr = data.toString() // 将二进制的数据转换为字符串
   state.songs = JSON.parse(dataStr) // 将字符串转换为json对象
 }
 function testDel (req) {
@@ -37,12 +37,26 @@ function testDel (req) {
   }
   console.log('要写入的数据', songs);
 }
-// let req = {
-//   body: {
-//     key: '70101110-12af-11eb-a7b8-75ac0489aa37'
-//   }
-// }
-// testDel(req)
+function testFresh(req,res){
+  let { songs } = state
+    let { name, author } = req.body
+    let uuid = uuidv1().replace(/-/g,'')
+    let wholeItem = Object.assign(state.itemSong, req.body, { key: uuid })
+    songs[`${uuid}&${name}&${author}`] = wholeItem
+    console.log('要插入的数据', wholeItem)
+    utils.writeJson(res, state, songs)
+}
+let req = {
+  body: {
+    name:'22',
+    author:'22',
+    dynasty: '宋',
+    role: '婉约派',
+    poetry: '寒蝉凄切'
+  }
+}
+let res = ''
+// testFresh(req,res)
 module.exports = {
   'POST /wanyue/search': (req, res) => {
     let { songs } = state
@@ -82,12 +96,12 @@ module.exports = {
   },
   'POST /wanyue/fresh': (req, res) => {
     let { songs } = state
+    console.log('开始时的数据', JSON.parse(JSON.stringify(songs)))
     let { name, author } = req.body
     let uuid = uuidv1().replace(/-/g,'')
     let wholeItem = Object.assign(state.itemSong, req.body, { key: uuid })
-    songs[`${uuid}&${name}&${author}`] = wholeItem
-    console.log('要插入的数据', wholeItem,Object.keys(songs),`${uuid}&${name}&${author}`)
-    console.log('最后要插入的数据', songs)
+    songs[`${uuid}&${name}&${author}`] = JSON.parse(JSON.stringify(wholeItem)) // 这个搞了好久
+    console.log('要插入的对象', wholeItem,Object.values(songs))
     utils.writeJson(res, state, songs)
   },
   'POST /wanyue/del': (req, res) => {

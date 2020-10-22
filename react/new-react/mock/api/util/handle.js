@@ -20,7 +20,8 @@ module.exports = {
   writeJson: (res, state, str) => {
     let { fileUrl } = state
     let json = JSON.stringify(str)
-    // console.log('要写入的数据', json)
+    // fs.writeFileSync(fileUrl, json)
+    console.log('要写入的数据', json)
     fs.writeFile(fileUrl, json, function (err) {
       if (err) {
         console.error(err);

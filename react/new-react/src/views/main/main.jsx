@@ -19,8 +19,6 @@ export default class SiderDemo extends React.Component {
     this.state = {
       collapsed: false,
       route: route, // 在中间界面中要显示的组件
-      // openKey: '/drypot', // 默认打开的父菜单
-      // selectedKey: '/drypot/crab', // 默认选择的子菜单
       openKey: `/${parPath}`, // 之前每次执行history.push(path)默认打开的菜单都是路径跳转的那个菜单,
       // 但是点击子菜单也能执行这句,所以需要根据跳转的路径来判断默认打开的父菜单以及选中的子菜单.
       selectedKey: pathname
@@ -71,7 +69,6 @@ export default class SiderDemo extends React.Component {
         <Layout>
           <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} theme='light'>
             <div className="logo" />
-            {/* <Menu theme='light' defaultSelectedKeys={['/drypot/crab']} defaultOpenKeys={['/drypot']} mode="inline" style={{ background: '#fff' }}> */}
             <Menu theme='light' defaultSelectedKeys={[this.state.selectedKey]} defaultOpenKeys={[this.state.openKey]} mode="inline" style={{ background: '#fff' }}>
               {menus}
             </Menu>
