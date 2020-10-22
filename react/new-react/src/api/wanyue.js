@@ -8,3 +8,6 @@ export const edit = (params) => {
 export const fresh = (params) => {
   return axios.post('/wanyue/fresh', params)
 }
+export const del = (params) => {
+  return axios.post('/wanyue/del', params)
+}

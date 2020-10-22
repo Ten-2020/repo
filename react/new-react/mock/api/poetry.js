@@ -14,7 +14,7 @@ const state = {
     "dynasty": "",
     "poetry": ""
   },
-  songs:''
+  songs: ''
 }
 
 if (!state.songs) {
@@ -22,10 +22,30 @@ if (!state.songs) {
   let dataStr = datas.toString() // 将二进制的数据转换为字符串
   state.songs = JSON.parse(dataStr) // 将字符串转换为json对象
 }
-
+function testDel (req) {
+  let { songs } = state
+  let { key } = req.body
+  debugger
+  let reg = `${key}&[^&]+&[^&]+`
+  let keys = Object.keys(songs)
+  for (let k of keys) {
+    if (new RegExp(reg).test(k)) {
+      debugger
+      delete songs[k]
+      break
+    }
+  }
+  console.log('要写入的数据', songs);
+}
+// let req = {
+//   body: {
+//     key: '70101110-12af-11eb-a7b8-75ac0489aa37'
+//   }
+// }
+// testDel(req)
 module.exports = {
   'POST /wanyue/search': (req, res) => {
-    let {songs}  = state
+    let { songs } = state
     let { name, author } = req.body
     let vals = ['', name, author] // 加上key是为了在编辑时能够找到数据的来源
     let reg = utils.mixReg(vals)
@@ -45,7 +65,7 @@ module.exports = {
   },
   'POST /wanyue/edit': (req, res) => {
     console.log('要编辑的数据', req.body)
-    let {songs}  = state
+    let { songs } = state
     let { key, name, author } = req.body
     let reg = `${key}&[^&]+&[^&]+`
     let keys = Object.keys(songs)
@@ -61,11 +81,26 @@ module.exports = {
     utils.writeJson(res, state, songs)
   },
   'POST /wanyue/fresh': (req, res) => {
-    let {songs}  = state
+    let { songs } = state
     let { name, author } = req.body
-    let uuid = uuidv1()
+    let uuid = uuidv1().replace(/-/g,'')
     let wholeItem = Object.assign(state.itemSong, req.body, { key: uuid })
     songs[`${uuid}&${name}&${author}`] = wholeItem
+    console.log('要插入的数据', wholeItem,Object.keys(songs),`${uuid}&${name}&${author}`)
+    console.log('最后要插入的数据', songs)
     utils.writeJson(res, state, songs)
-  }
+  },
+  'POST /wanyue/del': (req, res) => {
+    let { songs } = state
+    let { key } = req.body
+    let reg = `${key}&[^&]+&[^&]+`
+    let keys = Object.keys(songs)
+    for (let k of keys) {
+      if (new RegExp(reg).test(k)) {
+        delete songs[k]
+        break
+      }
+    }
+    utils.writeJson(res, state, songs)
+  },
 }

@@ -6,7 +6,7 @@
 import React, { Component } from 'react'
 import { Form, Input, Button, Card, Row, Col, Table, message, Modal } from 'antd'
 import './wanyue.less'
-import { search, edit, fresh } from 'src/api/wanyue'
+import { search, edit, fresh, del } from 'src/api/wanyue'
 
 const layout = {
   labelCol: { span: 2 },
@@ -20,6 +20,13 @@ export default class Wanyue extends Component {
   formRef = React.createRef()
   formModal = React.createRef()
   columns = [
+    {
+      title: '派别',
+      dataIndex: 'role',
+      key: 'role',
+      width: 100,
+      align: 'center'
+    },
     {
       title: '词牌名',
       dataIndex: 'name',
@@ -47,7 +54,7 @@ export default class Wanyue extends Component {
       key: 'poetry',
     },
     {
-      title: 'Action',
+      title: '操作',
       key: 'operation',
       fixed: 'right',
       width: 150,
@@ -55,7 +62,7 @@ export default class Wanyue extends Component {
       render: (text, record) => (
         <>
           <Button htmlType="button" size="small" type="primary" onClick={() => this.handleEdit(record)}>编辑</Button>
-          <Button htmlType="button" size="small" type="danger" style={{ marginLeft: '10px' }}>删除</Button>
+          <Button htmlType="button" size="small" type="danger" onClick={() => this.handleDel(record)} style={{ marginLeft: '10px' }}>删除</Button>
         </>
       )
     },
@@ -100,12 +107,13 @@ export default class Wanyue extends Component {
     this.setState({
       ifModify: false,
       modalShow: true,
-      // modalData: '' // 这个为了测试,先不要置空
+      modalData: ''
     })
+    this.formModal.current && this.formModal.current.resetFields()
   }
   handleOk = e => { // 区别是新增还是编辑的关键在于 ifModify
     console.log('查询条件', this.state.factor)
-    let params = this.formModal.current.getFieldsValue(['author', 'name', 'dynasty', 'poetry','key'])
+    let params = this.formModal.current.getFieldsValue(['author','role', 'name', 'dynasty', 'poetry', 'key'])
     if (this.state.ifModify) {
       console.log('打印编辑的数据', params)
       edit(params).then((res) => {
@@ -139,6 +147,31 @@ export default class Wanyue extends Component {
       modalShow: false,
     })
   }
+  handleDel = (item) => {
+    // console.log('要删除的数据',item);
+    message.destroy()
+    Modal.confirm({
+      title: '删除',
+      content: `确定删除${item.author}的${item.name}吗?`,
+      onOk: () => {
+        // this.table_data.splice(index, 1) // 先以这个来测试下,之后用下面的来实现
+        let params = {
+          key: item.key
+        }
+        del(params).then(res => {
+          console.log('删除',params,res);
+          if (res.status === 200) {
+            message.success('删除成功',this)
+            this.search()
+          } else {
+            message.error('删除失败', res.msg)
+          }
+        }).catch(err => {
+          message.error('删除失败', err)
+        })
+      }
+    })
+  }
   search = (factor) => { // 传空表示查询所有
     let params = {
       name: '',
@@ -146,7 +179,7 @@ export default class Wanyue extends Component {
     }
     factor && (params = factor)
     search(params).then((res) => {
-      console.log('res',res);
+      console.log('查询',factor,res);
       this.setState({ list: res.data })
     }).catch(function (error) {
       console.log('获取失败', error)
@@ -204,7 +237,7 @@ export default class Wanyue extends Component {
                     重置
                   </Button>
                   <Button onClick={this.handleFresh} htmlType="button" size="small" type="default" style={{ marginLeft: '30px' }}>
-                    新鲜
+                    新增
                   </Button>
                 </Form.Item>
               </Col>
@@ -220,6 +253,9 @@ export default class Wanyue extends Component {
           onCancel={this.handleCancel}
         >
           <Form name="abc" ref={this.formModal} initialValues={this.state.modalData}>
+          <Form.Item name="role" label="派别" rules={[{ required: true }]}>
+              <Input></Input>
+            </Form.Item>
             <Form.Item name="author" label="作者" rules={[{ required: true }]}>
               <Input></Input>
             </Form.Item>
