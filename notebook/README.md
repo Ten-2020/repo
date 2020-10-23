@@ -1,5 +1,21 @@
 # 突然发现,还是把新发现的写在上面好点
 
+### 10-23 在项目 new-react 中发现的 bug
+
+- 问题:新增的时候,第二次时新增的会把第一次新增的数据给覆盖,如:
+- 第一次要添加的数据: 'abc&d&e':{name:'22',author:'22'}
+- 第二次要添加的数据: 'aaa&f&g':{name:'33',author:'33'}
+- 可是在第二次添加成功之后,发现第一次添加的数据变成了第二次的了:'abc&d&e':{name:'33',author:'33'}
+- songs[`${uuid}&${name}&${author}`] = item 添加的方法是这样的,这个 uuid 是唯一的,所以 key 是不会重复的
+- 所以会给 songs 添加一个新属性.
+- 解决思路: let item = Object.assign(state.itemSong, req.body, { key: uuid })
+- 这个 item 每次都指向的是 state.itemSong,而这个是全局变量是不变的,所以得用深度复制来把它复制出来
+- 解决方法: songs[`${uuid}&${name}&${author}`] = JSON.parse(JSON.stringify(item))
+- 之所以这个 item 指向不变,是因为 state.itemSong 不变,是否可以深度复制后者--->这个是记录这个 bug 才想到的
+- 实践证明就是后者的问题.
+- 之前也经常会遇到在异步请求的时候,会出现参数都变成最后一次传输的情形,之前是用 let,或者深度复制.
+- 虽然这个 item 也是用 let 定义的,但是它代表的是同一个地址|具体也说不清楚.
+
 ### 10-16 在项目 new-react 中实现正则
 
 - 校验正则有两个方法:RegExp.test(str)和 str.match(str/regexp)
@@ -7,7 +23,7 @@
 - 根据第二种方法:str.match(`/${reg}/`),返回 NULL
 - 根据第一种方法:要动态生成正则表达式,开始写的是`/${reg}/`,这个会生成字符串,返回 false
 - 解决:new RegExp(reg).test(k),返回 true
-- 这个new RegExp会自动为字符串加上 / /,使其成为正则表达式.
+- 这个 new RegExp 会自动为字符串加上 / /,使其成为正则表达式.
 
 ### 9-9 通过测试发现的一些问题(9-10 更新)
 
