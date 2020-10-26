@@ -4,11 +4,12 @@ const CracoLessPlugin = require('craco-less');
 module.exports = {
   devServer: {
     //如果不使用mocker-api库
-    before: require('./mock/api/index')// before如果不行就用after,可惜用不到了
+    before: require('./mock/api/index'),// before如果不行就用after,可惜用不到了
     // before(app){
     //   app.get('/test/get', function(req, res){    
     //    res.json({ get: 'response get' });
     //   });
+    hot:true
   },
   plugins: [
     {
