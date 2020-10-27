@@ -3,14 +3,14 @@
 ```js
 module.exports = {
   devServer: {
-    before: require('./mock/api/index')// before如果不行就用after,可惜用不到了
+    before: require('./mock/api/index')
   }
 ```
 - 一来是因为这些文件是在启动服务器之前就已经被编译了,就跟配置文件一样,即使你改了,它也不会热更新
 - 如果这些文件热更新是否由我来决定就相当好了.就不用一直在找配置,一直在网上找教程,一起在找........
 - 一来如craco start 就会去读取craco.config.js这些文件,就已经配置好了.不能自主定义.贼好用.
 - craco 是新的,所以很少有人知道如何配置.
-
+- 是否运行自己定义的命令,仿如这个 craco start 命令
 ### 10-19 使用node.js来对文件进来编写
 - 现在的文件都是手写的,是否可以通过node.js自动书写
 ### 10-19 在表格的columns中绑定编辑事件时发现:
