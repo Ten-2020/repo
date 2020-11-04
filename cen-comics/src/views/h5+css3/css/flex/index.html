@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="div-less">
+    <div class="div-left">aaaa</div>
+    <div class="div-center">bbbb</div>
+    <div class="div-right">cccc</div>
+  </div>
+</body>
+<style>
+  .div-less {
+    display: flex; /* 这个要写 */
+    flex-direction: row-reverse;/* 逆向 */
+  }
+  .div-left {
+    background-color: blueviolet;
+    height: 100vh;
+  }
+  .div-center{
+    flex:auto;
+    border: 2px solid red;
+  }
+  .div-right {
+    background-color: rgb(47, 114, 81);
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+</style>
+
+</html>
