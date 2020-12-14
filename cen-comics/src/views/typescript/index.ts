@@ -41,7 +41,7 @@ y = null //运行正确
 
 class Site {
   name():void{
-    console.log('Runoob')
+    console.log('Run')
   }
 }
 let obj = new Site()
