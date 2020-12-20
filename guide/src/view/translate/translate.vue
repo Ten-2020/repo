@@ -25,14 +25,19 @@
         <Tag color="success" type="dot" closable v-show="tag_text" style="{cursor:default;}"
         @dblclick.native="copyText">{{tag_text}}</Tag>
       </Row>
+      <custom-input></custom-input>
     </div>
   </div>
 </template>
 <script>
 import MD5 from '@/utils/md5'
 import copy from '@/utils/copy'
+import customInput from '@/view/translate/com/customInput'
 export default {
   name: 'translate',
+  components:{
+    customInput
+  },
   data () {
     return {
       appid: '20200729000529033',// 这两个是百度翻译注册的id
