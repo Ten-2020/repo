@@ -8,3 +8,5 @@
 .history/
 package-lock.json
 **/package-lock.json
+**/package.json
+**/yarn.lock
