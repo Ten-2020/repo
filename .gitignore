@@ -7,4 +7,4 @@
 *.sw*
 .history/
 package-lock.json
-/san-power/package-lock.json
+**/package-lock.json
